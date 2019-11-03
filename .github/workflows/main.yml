@@ -13,8 +13,8 @@ jobs:
       fail-fast: false
       max-parallel: 6
       matrix:
-        python-version: [3.6, 3.7]
-        #ha-version: ["stable"]
+        python-version: [3.6, 3.7, 3.8]
+        ha-version: ["stable","beta"]
 
     steps:
     - uses: actions/checkout@v1
@@ -36,11 +36,18 @@ jobs:
 
     - name: Install Home Assistant ${{ matrix.ha-version }}
       run: |
-        python3 -m venv homeassistant
-        cd homeassistant
-        source bin/activate
-        python3 -m pip install homeassistant
-        
+        if [ ${{ matrix.ha-version }} == "stable" ]; then
+          python3 -m venv homeassistant
+          cd homeassistant
+          source bin/activate
+          python3 -m pip install homeassistant
+        elif [ ${{ matrix.ha-version }} == "beta" ]; then
+          python3 -m venv homeassistant
+          cd homeassistant
+          source bin/activate
+          python3 -m pip install --pre homeassistant
+        fi
+
     - name: Prep HA Config Files to work with CI
       run: |
           mv test_secrets.yaml secrets.yaml
