@@ -75,3 +75,8 @@
 # Google colors
       google-red-500: '#E45E65'
       google-green-500: '#39E949'
+
+  extra_html_url:
+    - https://raw.githubusercontent.com/andrey-git/home-assistant-custom-ui/master/state-card-custom-ui.html
+  extra_html_url_es5:
+    - https://raw.githubusercontent.com/andrey-git/home-assistant-custom-ui/master/state-card-custom-ui-es5.html
