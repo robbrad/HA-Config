@@ -1,0 +1,19 @@
+#https://home-assistant.io/components/sensor.nest/
+  - platform: nest
+    monitored_conditions:
+      - temperature
+      - target
+      - humidity
+      - operation_mode
+
+#https://home-assistant.io/components/sensor.template/
+  - platform: template
+    sensors:
+     entryway_away_mode:
+       value_template: '{% if state_attr("climate.entryway", "preset_mode") == "away" %}
+            Away
+          {% elif state_attr("climate.entryway", "preset_mode") == "Away and Eco" %}
+            Away
+          {% else %}
+            Home
+          {% endif %}'

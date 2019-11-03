@@ -1,0 +1,3 @@
+  - platform: workday
+    country: 'UnitedKingdom'
+    workdays: [mon, tue, wed, thu, fri]

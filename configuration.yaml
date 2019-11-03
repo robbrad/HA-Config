@@ -1,0 +1,316 @@
+####################################################
+#                                                  #
+#                 HOME ASSISTANT                   #
+#                                                  #
+####################################################
+#https://home-assistant.io/docs/configuration/basic/
+homeassistant:
+  # Customization file
+  packages: !include_dir_named packages
+  customize: !include customize.yaml
+  whitelist_external_dirs:
+    - !secret dirwhitelist
+  auth_providers:
+   - type: trusted_networks
+     trusted_networks:
+       - 192.168.0.0/24
+       - 10.8.0.0/24
+
+system_health:
+
+#Influx DB
+influxdb:
+  host: 192.168.0.30
+  port: 8086
+
+utility_meter:
+  hourly_energy:
+    source: sensor.emoncms6_overallkwh
+    cycle: hourly
+  daily_energy:
+    source: sensor.emoncms6_overallkwh
+    cycle: daily
+  weekly_energy:
+    source: sensor.emoncms6_overallkwh
+    cycle: weekly
+  monthly_energy:
+    source: sensor.emoncms6_overallkwh
+    cycle: monthly
+  yearly_energy:
+    source: sensor.emoncms6_overallkwh
+    cycle: yearly
+
+#https://home-assistant.io/components/history/
+history:
+
+#https://home-assistant.io/components/sun/
+sun:
+
+#https://home-assistant.io/components/config/
+config:
+
+#https://home-assistant.io/components/recorder/
+recorder:
+  purge_interval: 1
+  purge_keep_days: 2
+
+#https://home-assistant.io/components/logger/
+logger:
+  default: debug
+  #logs:
+  #  homeassistant.components.sensor.template: critical
+  #  homeassistant.components.cover: critical
+ios:
+  # iOS App SupporT
+
+http:
+
+# Checks for available updates
+# Note: This component will send some information about your system to
+# the developers to assist with development of Home Assistant.
+# For more information, please see:
+# https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
+updater:
+  # Optional, allows Home Assistant developers to focus on popular components.
+  # include_used_components: true
+
+# Discover some devices automatically
+discovery:
+
+# Allows you to issue voice commands from the frontend in enabled browsers
+conversation:
+
+# View all events in a logbook
+logbook:
+
+# Enables a map showing the location of tracked devices
+map:
+
+# Text to speech
+tts:
+  - platform: google_translate
+    service_name: google_say
+
+# Cloud
+cloud:
+
+####################################################
+#                                                  #
+#      LINKS TO INDIVUAL CONFIGURATION FILES       #
+#                                                  #
+####################################################
+
+#https://home-assistant.io/docs/configuration/splitting_configuration/
+group: !include groups.yaml
+device_tracker: !include device_tracker.yaml
+notify: !include_dir_merge_list notification/
+switch: !include_dir_merge_list switches/
+sensor: !include_dir_merge_list sensors/
+automation: !include automations.yaml
+script: !include scripts.yaml
+shell_command: !include shell_commands.yaml
+binary_sensor: !include_dir_merge_list binary_sensors/
+zone: !include zones.yaml
+input_select: !include input_select.yaml
+frontend: !include frontend.yaml
+input_boolean: !include input_boolean.yaml
+camera: !include camera.yaml
+customizer:
+  custom_ui: local
+
+python_script: !include_dir_merge_named python_scripts/
+####################################################
+#                                                  #
+#                OPEN WEATHER MAP                  #
+#                                                  #
+####################################################
+
+#https://home-assistant.io/components/weather.openweathermap/
+weather:
+  - platform: darksky
+    api_key: !secret darkskyapi
+####################################################
+#                                                  #
+#                      NEST                        #
+#                                                  #
+####################################################
+
+#https://home-assistant.io/components/nest/
+nest:
+  client_id: !secret nest_client_id
+  client_secret: !secret nest_client_secret
+
+####################################################
+#                                                  #
+#                   WEBLINKS                       #
+#                                                  #
+####################################################
+
+#https://home-assistant.io/components/weblink/
+weblink:
+  entities:
+    - name: Home Assistant Webpage
+      url: https://home-assistant.io/
+    - name: Home Assistant Forum
+      url: https://community.home-assistant.io/
+    - name: Home Assistant Chat
+      url: https://discordapp.com/channels/330944238910963714/330944238910963714
+
+####################################################
+#                                                  #
+#                     MQTT                         #
+#                                                  #
+####################################################
+
+#https://home-assistant.io/docs/mqtt/broker/#run-your-own
+mqtt:
+  broker: 192.168.0.30
+  port: 1883
+  username: !secret mqtt_user
+  password: !secret mqtt_pass
+  discovery: true
+####################################################
+#                                                  #
+#                     Media Players                #
+#                                                  #
+####################################################
+media_player:
+  - platform: lg_netcast
+    host: 192.168.0.50
+    access_token: !secret lgpairkey
+    name: LG Smart TV
+  - platform: kodi
+    host: 192.168.0.12
+    name: Kodi Lounge
+  - platform: squeezebox
+    host: 192.168.0.82
+    port: 9000
+####################################################
+#                                                  #
+#                     Wemo Plugs                   #
+#                                                  #
+####################################################
+wemo:
+  static:
+    - 192.168.0.61
+    - 192.168.0.62
+    - 192.168.0.63
+
+eufy:
+  username: !secret eufy_username
+  password: !secret eufy_password
+
+####################################################
+#                                                  #
+#                     Limitless LED                #
+#                                                  #
+####################################################
+light:
+  - platform: limitlessled
+    bridges:
+      - host: 192.168.0.60
+        groups:
+        - number: 1
+          type: rgbw
+          name: LoungeLight2
+        - number: 2
+          type: rgbw
+          name: LoungeLight3
+        - number: 3
+          type: rgbw
+          name: LoungeLight4
+        - number: 4
+          type: rgbw
+          name: LoungeLight5
+
+  - platform: flux_led
+    devices:
+      192.168.0.86:
+        name: led_strip_lounge
+
+cover:
+  platform: opengarage
+  covers:
+      garage:
+        host:  192.168.0.67
+        device_key: opendoor
+        name:  GarageDoor
+
+panel_iframe:
+  kodi_remote:
+    title: 'Kodi Remote'
+    url: 'http://192.168.0.12:8080'
+    icon: mdi:kodi
+
+####################################################
+#                                                  #
+#            Ring Door Bell                        #
+#                                                  #
+####################################################
+ring:
+  username: !secret ring_username
+  password: !secret ring_password
+
+####################################################
+#                                                  #
+#            Image Processing                      #
+#                                                  #
+####################################################
+image_processing: !include_dir_merge_list imageprocessing/
+
+speedtestdotnet:
+  scan_interval:
+    hours: 3
+  monitored_conditions:
+    - ping
+    - download
+    - upload
+
+person:
+
+tplink:
+  switch:
+    - host: 192.168.0.83
+    - host: 192.168.0.84
+    - host: 192.168.0.85
+
+climate:  
+  - platform: floureon
+    name: UnderfloorHeating
+    mac: "78:0f:77:d4:40:eb"
+    host: 192.168.0.89
+    #autotune: "some-overshoot"  
+    check_interval:
+      seconds: 30
+    scan_interval:
+      seconds: 15
+
+alert:
+  garage_door:
+    name: Garage is open
+    done_message: Garage is closed
+    entity_id: cover.garagedoor
+    state: 'open'
+    repeat: 2
+    can_acknowledge: true
+    skip_first: true
+    notifiers:
+      - push_bullet
+
+homekit:        
+  ip_address: 192.168.0.30
+  filter:
+    include_domains:
+      - switch
+      - light
+      - media_player
+      - sensor
+      - cover
+      - climate
+
+stream:
+####################################################
+#                                                  #
+#            END OF CONFIGURATION FILE             #
+#                                                  #
+####################################################

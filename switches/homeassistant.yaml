@@ -1,0 +1,5 @@
+- platform: command_line
+  switches:
+   upgradehomeassistant:
+    command_on: '/home/rob/scripts/autoupgradeHomeAssistant'
+    friendly_name: Upgrade Home Assistant

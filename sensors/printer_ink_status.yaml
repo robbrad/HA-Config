@@ -1,0 +1,35 @@
+  - platform: scrape
+    resource: http://192.168.0.199/general/status.html
+    name: Magenta Ink Level
+    select: 'table#inkLevel > tr > td:nth-of-type(1) > img'
+    attribute: height
+    value_template: '{{ (value|float/53*100)|round(0) }}'
+    unit_of_measurement: "%"
+    scan_interval: 86400
+
+  - platform: scrape
+    resource: http://192.168.0.199/general/status.html
+    name: Cyan Ink Level
+    select: 'table#inkLevel > tr > td:nth-of-type(2) > img'
+    attribute: height
+    value_template: '{{ (value|float/53*100)|round(0) }}'
+    unit_of_measurement: "%"
+    scan_interval: 86400
+
+  - platform: scrape
+    resource: http://192.168.0.199/general/status.html
+    name: Yellow Ink Level
+    select: 'table#inkLevel > tr > td:nth-of-type(3) > img'
+    attribute: height
+    value_template: '{{ (value|float/53*100)|round(0) }}'
+    unit_of_measurement: "%"
+    scan_interval: 86400
+
+  - platform: scrape
+    resource: http://192.168.0.199/general/status.html
+    name: Black Ink Level
+    select: 'table#inkLevel > tr > td:nth-of-type(4) > img'
+    attribute: height
+    value_template: '{{ (value|float/53*100)|round(0) }}'
+    unit_of_measurement: "%"
+    scan_interval: 86400

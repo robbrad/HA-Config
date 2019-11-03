@@ -1,0 +1,16 @@
+#https://home-assistant.io/components/sensor.template/
+  - platform: template
+    sensors:
+      battery_robsiphone:
+        unit_of_measurement: '%'
+        value_template: '{{ states.device_tracker.robsiphone.attributes.battery | round(0) }}'
+
+      charging_robsiphone:
+        value_template: '{{ states.device_tracker.robsiphone.attributes.battery_status }}'
+
+      gps_robsiphone:
+        value_template: '{{ states.device_tracker.robsiphone.attributes.gps_accuracy | round(0) }}'
+
+      interval_robsiphone:
+        unit_of_measurement: 'min'
+        value_template: '{{ states.device_tracker.robsiphone.attributes.interval | round(0) }}'

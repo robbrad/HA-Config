@@ -1,0 +1,686 @@
+- id: Air Data Alert
+  alias: Air Data Alert
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.Air_Data_Received_in_2hrs
+    below: 13
+  action:
+  - service: notify.push_bullet
+    data:
+      target: device/robsphone
+      message: No Air Data received for an hour
+      title: IoT Data
+- id: Kirsty To Stepping Hill Alert
+  alias: Kirsty To Stepping Hill Alert
+  trigger:
+  - platform: time
+    at: 07:45:00
+  condition:
+    condition: and
+    conditions:
+    - condition: time
+      after: 07:45:00
+      before: 08:00:00
+      weekday:
+      - mon
+      - tue
+      - wed
+  action:
+  - service: notify.push_bullet
+    data:
+      target: device/kirstysphone
+      message: Your commute will currently take {{ states('sensor.KirstyHome2Work')
+        }} minutes
+      title: Kirsty Commute
+- id: Notify Me when its time to leave for work
+  alias: Notify Me when its time to leave for work
+  trigger:
+  - platform: state
+    entity_id: sensor.time_to_leave_for_work
+    to: 'True'
+    from: 'False'
+  condition:
+    condition: and
+    conditions:
+    - condition: numeric_state
+      entity_id: sensor.ha_runtime_in_minutes
+      above: 1
+    - condition: state
+      entity_id: binary_sensor.workday_sensor
+      state: 'on'
+  action:
+  - service: notify.push_bullet
+    data:
+      message: Based on current traffic, you have 10 minutes to leave if you want
+        to get to work by 9:00am.  Traffic is {{ states('sensor.my_traffic_density_to_work')
+        }} today.
+      target: device/robsphone
+      title: Rob Time to Leave for Work
+- id: Garage Door Opening Alert
+  alias: Garage Door Opening Alert
+  trigger:
+  - platform: state
+    entity_id: sensor.garage_door_status
+    to: Opening
+    from: Closed
+  action:
+  - service: notify.push_bullet
+    data:
+      target: device/robsphone
+      message: The Garage Door is opening
+      title: Garage Door Opening
+- id: Garage Door Closing Alert
+  alias: Garage Door Closing Alert
+  trigger:
+  - platform: state
+    entity_id: sensor.garage_door_status
+    to: Closing
+    from: Open
+  action:
+  - service: notify.push_bullet
+    data:
+      target: device/robsphone
+      message: The Garage Door closing
+      title: Garage Door Closing
+- id: Battery Alert
+  alias: Battery Alert
+  trigger:
+  - platform: time
+    at: '18:00:00'
+  condition:
+    condition: template
+    value_template: '{%- set threshold = 40 -%} {%- for item in states.sensor if (item.attributes.battery_level
+      is defined and item.attributes[''battery_level''] | int < threshold) or ("battery"
+      in item.name | lower and ((item.state | int < threshold and item.state|int !=
+      0) or item.state | lower == "low" or item.state | lower == "unknown")) -%} {%-
+      if loop.first -%} {{ true }} {%- endif -%} {%- endfor -%}'
+  action:
+  - service: notify.push_bullet
+    data:
+      target: device/robsphone
+      message: '{%- set threshold = 40 -%} {%- set domains = [states.sensor ] -%}
+        {%- for domain in domains -%} {%- if loop.first -%} The following devices
+        have low battery levels: {%- endif -%} {%- for item in domain if (item.attributes.battery_level
+        is defined and item.attributes[''battery_level''] | int < threshold) or ("battery"
+        in item.name | lower and ((item.state | int < threshold and item.state|int
+        != 0) or item.state | lower == "low" or item.state | lower == "unknown"))
+        -%} {%- if (item.attributes.battery_level is defined and item.attributes[''battery_level'']
+        | int < threshold) %} {{ item.name }} ({{ item.attributes[''battery_level'']
+        }}), {% endif -%} {%- if "battery" in item.name | lower and ((item.state |
+        int < threshold and item.state|int != 0) or item.state | lower == "low" or
+        item.state | lower == "unknown") -%} {{ item.name }} ({{ item.state }}), {%
+        endif -%} {%- endfor -%} {%- endfor -%}'
+      title: Battery Low
+- id: Ethans Bedroom Lamp on
+  alias: Kids Bedroom Lamps on
+  trigger:
+  - at: '19:00:00'
+    platform: time
+  - platform: sun
+    event: sunset
+  action:
+  - data:
+      entity_id: switch.ethansbedroomlight
+    service: switch.turn_on
+  - data:
+      entity_id: switch.ionabedroom
+    service: switch.turn_on
+- id: Ethans Bedroom Lamp off
+  alias: Kids Bedroom Lamps off
+  trigger:
+  - at: 08:00:00
+    platform: time
+  action:
+  - data:
+      entity_id: switch.ethansbedroomlight
+    service: switch.turn_off
+  - data:
+      entity_id: switch.ionabedroom
+    service: switch.turn_off
+- id: Electric Blanket on at 930
+  alias: Electric Blanket on at 930
+  trigger:
+  - platform: time
+    at: '21:30:00'
+  action:
+    service: switch.turn_on
+    entity_id: switch.electric_blanket
+- id: Electric Blanket off at 11
+  alias: Electric Blanket off at 11
+  trigger:
+  - platform: time
+    at: '23:00:00'
+  action:
+    service: switch.turn_off
+    entity_id: switch.electric_blanket
+- id: EnSuite underfloor heating on
+  alias: EnSuite underfloor heating on
+  trigger:
+  - at: 06:30:00
+    platform: time
+  condition:
+  - condition: and
+    conditions:
+    - condition: time
+      weekday:
+      - mon
+      - tue
+      - wed
+      - thu
+      - fri
+      - sat
+      - sun
+    - below: 5
+      condition: numeric_state
+      entity_id: sensor.dark_sky_outside
+  action:
+  - service: climate.set_temperature
+    entity_id: climate.underfloorheating
+    data:
+      temperature: 25
+  - service: climate.set_hvac_mode
+    data:
+      hvac_mode: auto
+- id: EnSuite underfloor heating off
+  alias: EnSuite underfloor heating off
+  trigger:
+  - at: 07:00:00
+    platform: time
+  condition:
+  - condition: time
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
+    - sat
+    - sun
+  action:
+  - service: climate.set_temperature
+    entity_id: climate.underfloorheating
+    data:
+      temperature: 15
+  - service: climate.turn_off
+    entity_id: climate.underfloorheating
+  - service: climate.set_hvac_mode
+    data:
+      hvac_mode: false
+- id: Media Center on at Bedtime
+  alias: Media Center on at Bedtime
+  trigger:
+    platform: state
+    entity_id: sensor.charging_robsiphone
+    to: Charging
+  condition:
+    condition: and
+    conditions:
+    - condition: state
+      entity_id: switch.media_center
+      state: 'on'
+    - condition: time
+      after: '20:00:00'
+  action:
+  - service: notify.ios_robsiphone
+    data:
+      message: The HTPC is on and you are in bed
+      data:
+        push:
+          badge: 0
+          category: htpc
+- id: Desktop on at Bedtime
+  alias: Desktop on at Bedtime
+  trigger:
+    platform: state
+    entity_id: sensor.charging_robsiphone
+    to: Charging
+  condition:
+    condition: and
+    conditions:
+    - condition: state
+      entity_id: switch.desktop_pc
+      state: 'on'
+    - condition: time
+      after: '20:00:00'
+  action:
+  - service: notify.ios_robsiphone
+    data:
+      message: The Desktop is on and you are in bed
+      data:
+        push:
+          badge: 0
+          category: desktop
+- id: Scan for Objects at Frontdoor when motion detected
+  alias: Scan for Objects at Frontdoor when motion detected
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.ring_frontdoor_motion
+    to: 'on'
+  action:
+  - service: camera.snapshot
+    data:
+      entity_id: camera.frontdoor
+      filename: /tmp/frontdoor_latest.jpg
+  - service: image_processing.scan
+    data:
+      entity_id: image_processing.tensorflow_frontdoor
+- id: Scan for Objects in Garage when motion detected
+  alias: Scan for Objects in Garage when motion detected
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.garage_motion_sensor
+    to: 'on'
+  action:
+  - service: camera.snapshot
+    data:
+      entity_id: camera.garage
+      filename: /tmp/garage_latest.jpg
+  - service: image_processing.scan
+    data:
+      entity_id: image_processing.tensorflow_garage
+- id: Scan for Objects at Floodlight when motion detected
+  alias: Scan for Objects at Floodlight when motion detected
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.ring_frontfloodlight_motion
+    to: 'on'
+  action:
+  - service: camera.snapshot
+    data:
+      entity_id: camera.frontfloodlight
+      filename: /tmp/frontfloodlight_latest.jpg
+  - service: image_processing.scan
+    data:
+      entity_id: image_processing.tensorflow_frontfloodlight
+- id: Scan for Car Registrations at Floodlight when motion detected
+  alias: Scan for Car Registrations at Floodlight when motion detected
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.ring_frontfloodlight_motion
+    to: 'on'
+  action:
+  - service: image_processing.scan
+    data:
+      entity_id: image_processing.openalpr_frontfloodlight
+- id: Switch on away mode
+  alias: Switch on away mode
+  trigger:
+    platform: state
+    entity_id:
+    - sensor.entryway_away_mode
+    from: Home
+    to: Away
+  action:
+    service: input_boolean.turn_on
+    entity_id: input_boolean.awaymode
+- id: Switch off away mode
+  alias: Switch off away mode
+  trigger:
+    platform: state
+    entity_id:
+    - sensor.entryway_away_mode
+    from: Away
+    to: Home
+  action:
+    service: input_boolean.turn_off
+    entity_id: input_boolean.awaymode
+- id: Enable Away Security Mode
+  alias: Enable Away Security Mode
+  trigger:
+    platform: state
+    entity_id:
+    - input_boolean.awaymode
+    from: 'off'
+    to: 'on'
+  action:
+  - service: automation.turn_on
+    entity_id:
+    - automation.lights_on_when_away
+    - automation.lights_off_when_away_and_past_midnight
+  - service: automation.turn_off
+    entity_id:
+    - automation.EnSuite_underfloor_heating_off
+    - automation.EnSuite_underfloor_heating_on
+    - automation.Electric_Blanket_off_at_11
+    - automation.Electric_Blanket_on_at_930
+    - automation.Hallway_Light_on_at_sunset
+    - automation.Hallway_Light_off_at_2330
+  - service: switch.turn_off
+    entity_id:
+    - switch.garagerouter5g
+    - switch.gardenrouter5g
+    - switch.loungrouter5g
+    - switch.mainrouter5g
+    - switch.upstairsrouter5g
+- id: Disable Away Security Mode
+  alias: Disable Away Security Mode
+  trigger:
+    platform: state
+    entity_id:
+    - input_boolean.awaymode
+    from: 'on'
+    to: 'off'
+  action:
+  - service: automation.turn_off
+    entity_id:
+    - automation.lights_on_when_away
+    - automation.lights_off_when_away_and_past_midnight
+  - service: automation.turn_on
+    entity_id:
+    - automation.EnSuite_underfloor_heating_off
+    - automation.EnSuite_underfloor_heating_on
+    - automation.Electric_Blanket_off_at_11
+    - automation.Electric_Blanket_on_at_930
+    - automation.Hallway_Light_on_at_sunset
+    - automation.Hallway_Light_off_at_2330
+  - service: switch.turn_on
+    entity_id:
+    - switch.garagerouter5g
+    - switch.gardenrouter5g
+    - switch.loungrouter5g
+    - switch.mainrouter5g
+    - switch.upstairsrouter5g
+- id: Lights on when away
+  alias: Lights on when away
+  trigger:
+  - platform: sun
+    event: sunset
+  action:
+    service: switch.turn_on
+    entity_id:
+    - group.livingroomlights
+    - switch.hallwaylight
+    - switch.ethansbedroomlight
+    - switch.ionabedroom
+- id: Lights off when away and past midnight
+  alias: Lights off when away and past midnight
+  trigger:
+  - platform: time
+    at: 00:01:00
+  action:
+    service: switch.turn_off
+    entity_id:
+    - group.livingroomlights
+    - switch.hallwaylight
+    - switch.ethansbedroomlight
+    - switch.ionabedroom
+- id: Turn on Porch light on when there is movement
+  alias: Turn on Porch light on when there is movement
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.ring_frontfloodlight_motion
+    from: 'off'
+    to: 'on'
+  - platform: state
+    entity_id: binary_sensor.ring_frontdoor_motion
+    from: 'off'
+    to: 'on'
+  condition:
+    condition: or
+    conditions:
+    - condition: time
+      after: '23:00:00'
+    - condition: sun
+      before: sunrise
+    - condition: state
+      entity_id: switch.porchlight
+      state: 'Off'
+  action:
+    service: switch.turn_on
+    entity_id: switch.porchlight
+- id: Porch Light on at Sunset
+  alias: Porch Light on at Sunset
+  trigger:
+  - platform: sun
+    event: sunset
+  action:
+    service: switch.turn_on
+    entity_id: switch.porchlight
+- id: Porch Light off at 2300
+  alias: Porch Light off at 2300
+  trigger:
+  - platform: time
+    at: '23:00:00'
+  action:
+    service: switch.turn_off
+    entity_id: switch.porchlight
+- id: Turn off Porch light 5 minutes after last movement
+  alias: Turn off Porch light 5 minutes after last movement
+  trigger:
+  - entity_id: binary_sensor.ring_frontfloodlight_motion
+    for: 0:05:00
+    from: 'on'
+    platform: state
+    to: 'off'
+  - entity_id: binary_sensor.ring_frontdoor_motion
+    for: 0:05:00
+    from: 'on'
+    platform: state
+    to: 'off'
+  condition:
+  - condition: or
+    conditions:
+    - after: '23:00:00'
+      condition: time
+    - before: sunrise
+      before_offset: 01:00:00
+      condition: sun
+  action:
+  - entity_id: switch.porchlight
+    service: homeassistant.turn_off
+- id: Turn off GuestWifi If no users for 12 hours
+  alias: Turn off GuestWifi If no users for 12 hours
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.GuestWifiUserCount
+    below: 1
+    for:
+      hours: 12
+  action:
+    service: homeassistant.turn_off
+    entity_id: group.guest_wifi_switches
+- id: Lights off at Bedtime
+  alias: Lights off at Bedtime
+  trigger:
+  - platform: time
+    at: '23:00:00'
+  condition:
+    condition: and
+    conditions:
+    - condition: state
+      entity_id: binary_sensor.device_tracker_lgtv
+      state: 'off'
+    - condition: state
+      entity_id: binary_sensor.device_tracker_kirstyslaptop
+      state: 'off'
+  action:
+    service: switch.turn_off
+    entity_id: group.livingroomlights
+- id: AmbiLight off when TV is off
+  alias: AmbiLight off when TV is off
+  trigger:
+  - platform: state
+    entity_id: media_player.lg_smart_tv
+    to: 'off'
+    from: playing
+  action:
+    service: homeassistant.turn_off
+    entity_id: group.ambitv_switches
+- id: Hallway Light on at sunset
+  alias: Hallway Light on at sunset
+  trigger:
+  - platform: sun
+    event: sunset
+  action:
+    service: switch.turn_on
+    entity_id: switch.hallwaylight
+- id: Hallway Light off at 2330
+  alias: Hallway Light off at 2330
+  trigger:
+  - platform: time
+    at: '23:30:00'
+  action:
+    service: switch.turn_off
+    entity_id: switch.hallwaylight
+- id: Turn on Hallway light when there is movement
+  alias: Turn on Hallway light when there is movement
+  trigger:
+    platform: state
+    entity_id: binary_sensor.Hallway_Motion_sensor
+    from: 'off'
+    to: 'on'
+  condition:
+    condition: or
+    conditions:
+    - condition: time
+      after: '23:30:00'
+    - condition: sun
+      before: sunrise
+    - condition: state
+      entity_id: switch.hallwaylight
+      state: 'Off'
+  action:
+    service: homeassistant.turn_on
+    entity_id: switch.hallwaylight
+- id: Turn off Hallway light 5 minutes after last movement
+  alias: Turn off Hallway light 5 minutes after last movement
+  trigger:
+    platform: state
+    entity_id: binary_sensor.Hallway_Motion_sensor
+    to: 'off'
+    from: 'on'
+    for:
+      minutes: 5
+  condition:
+    condition: or
+    conditions:
+    - condition: time
+      after: '23:30:00'
+    - condition: sun
+      before: sunrise
+      before_offset: 01:00:00
+  action:
+    service: homeassistant.turn_off
+    entity_id: switch.hallwaylight
+- id: Christmas Lights on at sunset
+  alias: Christmas Lights on at sunset
+  trigger:
+  - platform: sun
+    event: sunset
+  action:
+    service: switch.turn_on
+    entity_id: switch.Christmas_lights
+- id: Christmas Lights on in the morning
+  alias: Christmas Lights on in the morning
+  trigger:
+  - platform: time
+    at: 06:00:00
+  action:
+    service: switch.turn_on
+    entity_id: switch.Christmas_lights
+- id: Christmas Lights off in the morning
+  alias: Christmas Lights off in the morning
+  trigger:
+  - platform: time
+    at: 09:00:00
+  action:
+    service: switch.turn_off
+    entity_id: switch.Christmas_lights
+- id: Christmas Lights off at 2300
+  alias: Christmas Lights off at 2300
+  trigger:
+  - platform: time
+    at: '23:00:00'
+  action:
+    service: switch.turn_off
+    entity_id: switch.Christmas_lights
+- id: Turn on kitchen light when there is movement
+  alias: Turn on kitchen light when there is movement
+  trigger:
+    platform: state
+    entity_id: binary_sensor.Kitchen_Motion_sensor
+    from: 'off'
+    to: 'on'
+  condition:
+    condition: or
+    conditions:
+    - condition: sun
+      after: sunset
+    - condition: sun
+      before: sunrise
+  action:
+    service: homeassistant.turn_on
+    entity_id: switch.KitchenLighting
+- id: Turn off kitchen light 5 minutes after last movement
+  alias: Turn off kitchen light 5 minutes after last movement
+  trigger:
+    platform: state
+    entity_id: binary_sensor.Kitchen_Motion_sensor
+    to: 'off'
+    from: 'on'
+    for:
+      minutes: 5
+  action:
+    service: homeassistant.turn_off
+    entity_id: switch.KitchenLighting
+- id: Enable MQTT discovery for all devices
+  alias: Enable MQTT discovery for all devices
+  trigger:
+    platform: homeassistant
+    event: start
+  action:
+  - service: mqtt.publish
+    data:
+      topic: cmnd/porchlight/SetOption19
+      payload: '1'
+- id: Study Light on when using PC
+  alias: Study Light on when using PC
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.luxvalue
+    above: 500
+  condition:
+    condition: and
+    conditions:
+    - condition: state
+      entity_id: switch.desktop_pc
+      state: 'on'
+  action:
+    service: homeassistant.turn_on
+    entity_id: switch.studydesklight
+- id: Make sure Billion is on
+  alias: Make sure Billion is on
+  trigger:
+    platform: state
+    entity_id: switch.billioninternet
+    to: 'off'
+    for:
+      minutes: 5
+  action:
+    service: homeassistant.turn_on
+    entity_id: switch.billioninternet
+- id: Make sure Billion is on at HA Startup
+  alias: Make sure Billion is on at HA Startup
+  trigger:
+    platform: homeassistant
+    event: start
+  action:
+    service: homeassistant.turn_on
+    entity_id: switch.billioninternet
+- id: '1570742635270'
+  alias: Upgrade Home Assistant
+  description: ''
+  trigger:
+  - entity_id: input_boolean.upgradehomeassistant
+    from: 'off'
+    platform: state
+    to: 'on'
+  action:
+   service: shell_command.cmd_upgrade_ha
+- id: github_ha_current_version
+  alias: 'Run Current HA Version Check every 2 hours'
+  trigger:
+    platform: time_pattern
+    minutes: '/120'
+  action:
+    service: shell_command.cmd_haversion_svg

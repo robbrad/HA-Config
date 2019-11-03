@@ -1,0 +1,40 @@
+
+#https://home-assistant.io/components/zone/
+####################################################
+#                                                  #
+#                     HOME                         #
+#                                                  #
+####################################################
+
+  - name: Home
+    latitude: !secret latitude
+    longitude: !secret longitude
+    radius: 750
+
+####################################################
+#                                                  #
+#                 Kirsty WORK                        #
+#                                                  #
+####################################################
+
+  - name: Rob Work
+    latitude: !secret rob_work_latitude
+    longitude: !secret rob_work_longitude
+    radius: 350
+
+####################################################
+#                                                  #
+#                  Kirsty WORK                        #
+#                                                  #
+####################################################
+
+  - name: Kirsty Work
+    latitude: !secret kirsty_work_latitude
+    longitude: !secret kirsty_work_longitude
+    radius: 350
+
+####################################################
+#                                                  #
+#            END OF CONFIGURATION FILE             #
+#                                                  #
+####################################################

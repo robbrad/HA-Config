@@ -1,0 +1,6 @@
+  - platform: ring
+
+  - platform: generic
+    name: Garage
+    still_image_url: !secret ReoCameraURL
+    stream_source: !secret CameraGarage_Source
