@@ -26,6 +26,11 @@
 
 # Hardware Running My Home Assistant Setup:
 
+# Continuous Integration Continuous Deployment
+I use [GitHub Actions](https://github.com/features/actions). When I commit a change to this repo it kicks off an automatic test of the config using a Home Assistant environment. See: [](https://github.com/robbrad/HA-Config/blob/master/.github/workflows/main.yml).
+
+It's very powerful and can run parallel tests on multiple versions of Python and Home Assistant.
+
 # HA-Config
 My Home Assistant Config
 
