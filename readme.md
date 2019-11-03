@@ -13,6 +13,7 @@
         <img src="https://img.shields.io/badge/dynamic/json?label=Latest%20HA%20Version&query=%24.info.version&url=https%3A%2F%2Fpypi.python.org%2Fpypi%2Fhomeassistant%2Fjson" /></a>
         <a href="https://github.com/robbrad/" alt="Last Commit">
         <img src="https://img.shields.io/github/last-commit/robbrad/HA-Config" /></a>
+        <a href="https://github.com/robbrad/HA-Config/stargazers"><img src="https://img.shields.io/github/stars/robbrad/HA-Config.svg?style=plasticr"/></a>
        
 </p>
 
@@ -21,21 +22,22 @@
 </p>
 
 # Introduction
-I discovered home assistent in 2017 and have been slowly adding to it since then.
+I discovered home assistant in 2017 and have been slowly adding to it since then.
 
 ## The setup
-I run a dedicated Ubuntu 18.04.3 LTS server Intel(R) Core(TM) i7-2600 CPU @ 3.40GHz with 16 gig of ram (This is my main server - I run other things on here as well as Home assistant)
+I run a dedicated Ubuntu 18.04.3 LTS server Intel(R) Core(TM) i7-2600 CPU @ 3.40GHz with 16 gig of ram (This is my main server - I run other things on here as well as Home Assistant)
 
 My setup is a Python Virtual Environment utilising this [guide](https://www.home-assistant.io/docs/installation/virtualenv/).
 
 # Automations
+
 
 # Hardware Running My Home Assistant Setup:
 
 # Continuous Integration Continuous Deployment
 I use [GitHub Actions](https://github.com/features/actions). When I commit a change to this repo it kicks off an [automatic test](https://github.com/robbrad/HA-Config/actions) of the config using a Home Assistant environment. See [the config here](https://github.com/robbrad/HA-Config/blob/master/.github/workflows/main.yml).
 
-It's very powerful and can run parallel tests on multiple versions of Python and Home Assistant. I currenlty test Python 3.6, 3.7, 3.8 as well as Home Assistant Stable and Beta versions. This helps me know if my config is going to work on a later version before I upgrade.
+It's very powerful and can run parallel tests on multiple versions of Python and Home Assistant. I currently test Python 3.6, 3.7, 3.8 as well as Home Assistant Stable and Beta versions. This helps me know if my config is going to work on a later version before I upgrade.
 
 # HA-Config
 My Home Assistant Config
