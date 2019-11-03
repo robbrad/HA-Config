@@ -6,7 +6,7 @@
 
 <p align="center">
     <a href="https://github.com/robbrad/HA-Config/actions" alt="Pipeline">
-        <img src="https://github.com/robbrad/HA-Config/workflows/HomeAssistantConfig/badge.svg" /></a>
+        <img src="https://github.com/robbrad/HA-Config/workflows/TestHomeAssistantConfig/badge.svg" /></a>
         <a href="assets/current_ha_version.svg" alt="Currently Running">
         <img src="assets/current_ha_version.svg" /></a>
         <a href="https://www.home-assistant.io/latest-release-notes/" alt="Latest HA Version">

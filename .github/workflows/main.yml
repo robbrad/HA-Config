@@ -1,4 +1,4 @@
-name: HomeAssistantConfig
+name: TestHomeAssistantConfig
 
 on:
   push:
