@@ -677,7 +677,7 @@
     to: 'on'
   action:
    service: shell_command.cmd_upgrade_ha
-- id: github_ha_current_version
+- id: 'Github ha current version to SVG'
   alias: 'Run Current HA Version Check every 2 hours'
   trigger:
     platform: time_pattern
