@@ -40,3 +40,12 @@
     port: 8088
     source:
       - entity_id: camera.frontdoor
+
+  - platform: amazon_rekognition
+    aws_access_key_id: !secret aws_access_key
+    aws_secret_access_key: !secret aws_secret_key
+    region_name: eu-west-1
+    target: Person
+    scan_interval: 604800
+    source:
+      - entity_id: camera.garage
