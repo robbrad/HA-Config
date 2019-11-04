@@ -15,8 +15,8 @@
 !binary_sensors
 !imageprocessing
 !custom_components
-!custom_components/customizer
 !custom_components/dlink_motion_sensor
+!custom_components/dlink_motion_sensor/manifest.json
 !custom_components/floureon
 !custom_components/floureon/manifest.json
 !notification
