@@ -113,6 +113,7 @@ binary_sensor: !include_dir_merge_list binary_sensors/
 zone: !include zones.yaml
 input_select: !include input_select.yaml
 frontend: !include frontend.yaml
+alert: !include_dir_merge_list alerts/
 input_boolean: !include input_boolean.yaml
 camera: !include camera.yaml
 customizer:
@@ -284,18 +285,6 @@ climate:
       seconds: 30
     scan_interval:
       seconds: 15
-
-alert:
-  garage_door:
-    name: Garage is open
-    done_message: Garage is closed
-    entity_id: cover.garagedoor
-    state: 'open'
-    repeat: 2
-    can_acknowledge: true
-    skip_first: true
-    notifiers:
-      - push_bullet
 
 homekit:        
   ip_address: 192.168.0.30

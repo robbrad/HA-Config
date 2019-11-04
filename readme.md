@@ -22,17 +22,17 @@
 </p>
 
 # Introduction
-I discovered home assistant in 2017 and have been slowly adding to it since then.
+I discovered [Home Assistant](https://www.home-assistant.io) in 2017 and have been slowly adding to it since then.
 
-## The setup
+## The Home Assistant Server
 I run a dedicated Ubuntu 18.04.3 LTS server Intel(R) Core(TM) i7-2600 CPU @ 3.40GHz with 16 gig of ram (This is my main server - I run other things on here as well as Home Assistant)
 
 My setup is a Python Virtual Environment utilising this [guide](https://www.home-assistant.io/docs/installation/virtualenv/).
 
 # Automations
+* 
 
-
-# Hardware Running My Home Assistant Setup:
+# Hardware Running in my Home Assistant Setup:
 
 # Continuous Integration Continuous Deployment
 I use [GitHub Actions](https://github.com/features/actions). When I commit a change to this repo it kicks off an [automatic test](https://github.com/robbrad/HA-Config/actions) of the config using a Home Assistant environment. See [the config here](https://github.com/robbrad/HA-Config/blob/master/.github/workflows/main.yml).
