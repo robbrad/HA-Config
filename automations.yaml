@@ -260,7 +260,7 @@
   - service: camera.snapshot
     data:
       entity_id: camera.frontdoor
-      filename: /tmp/frontdoor_latest.jpg
+      filename: /var/www/html/motion_detection/frontdoor_latest.jpg
   - service: image_processing.scan
     data:
       entity_id: image_processing.tensorflow_frontdoor
@@ -274,7 +274,7 @@
   - service: camera.snapshot
     data:
       entity_id: camera.garage
-      filename: /tmp/garage_latest.jpg
+      filename: /var/www/html/motion_detection/garage_latest.jpg
   - service: image_processing.scan
     data:
       entity_id: image_processing.tensorflow_garage
@@ -288,7 +288,7 @@
   - service: camera.snapshot
     data:
       entity_id: camera.frontfloodlight
-      filename: /tmp/frontfloodlight_latest.jpg
+      filename: /var/www/html/motion_detection/frontfloodlight_latest.jpg
   - service: image_processing.scan
     data:
       entity_id: image_processing.tensorflow_frontfloodlight
