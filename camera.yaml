@@ -4,3 +4,8 @@
     name: Garage
     still_image_url: !secret ReoCameraURL
     stream_source: !secret CameraGarage_Source
+
+  - platform: mjpeg
+    name: GGF
+    still_image_url: !secret ReoCameraURL
+    stream_source: !secret CameraGarage_Source
