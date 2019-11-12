@@ -58,7 +58,7 @@ recorder:
 
 #https://home-assistant.io/components/logger/
 logger:
-  default: debug
+  default: error
   #logs:
   #  homeassistant.components.sensor.template: critical
   #  homeassistant.components.cover: critical

@@ -1,0 +1,10 @@
+  - platform: mqtt
+    name: GarageCameraMotion
+    state_topic: "emqtt/CameraMotionGarage"
+    payload_on: "ON"
+    payload_off: "OFF"
+  - platform: mqtt
+    name: BackdoorCameraMotion
+    state_topic: "emqtt/CameraMotionBackdoor"
+    payload_on: "ON"
+    payload_off: "OFF"
