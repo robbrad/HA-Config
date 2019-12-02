@@ -10,6 +10,6 @@
     payload_off: "OFF"
   - platform: mqtt
     name: SideReturnCameraMotion
-    state_topic: "emqtt/SideReturnCameraMotion"
+    state_topic: "emqtt/CameraMotionSideReturn"
     payload_on: "ON"
     payload_off: "OFF"
