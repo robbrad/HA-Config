@@ -2,5 +2,13 @@
 
   - platform: generic
     name: Garage
-    still_image_url: !secret ReoCameraURL
+    still_image_url: !secret ReoCameraGarageURL
     stream_source: !secret CameraGarage_Source
+  - platform: generic
+    name: BackDoor
+    still_image_url: !secret ReoCameraBackDoorURL
+    stream_source: !secret CameraBackDoor_Source
+  - platform: generic
+    name: SideReturn
+    still_image_url: !secret ReoCameraSideReturneURL
+    stream_source: !secret CameraSideReturn_Source
