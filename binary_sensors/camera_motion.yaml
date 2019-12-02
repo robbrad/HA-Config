@@ -8,3 +8,8 @@
     state_topic: "emqtt/CameraMotionBackdoor"
     payload_on: "ON"
     payload_off: "OFF"
+  - platform: mqtt
+    name: SideReturnCameraMotion
+    state_topic: "emqtt/SideReturnCameraMotion"
+    payload_on: "ON"
+    payload_off: "OFF"

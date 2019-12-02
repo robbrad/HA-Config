@@ -65,6 +65,8 @@ logger:
 ios:
   # iOS App SupporT
 
+mobile_app:
+
 http:
 
 # Checks for available updates
