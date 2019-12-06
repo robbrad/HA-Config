@@ -1,15 +1,15 @@
   - platform: mqtt
-    name: GarageCameraMotion
+    name: gac_motion
     state_topic: "emqtt/CameraMotionGarage"
     payload_on: "ON"
     payload_off: "OFF"
   - platform: mqtt
-    name: BackdoorCameraMotion
+    name: bdc_motion
     state_topic: "emqtt/CameraMotionBackdoor"
     payload_on: "ON"
     payload_off: "OFF"
   - platform: mqtt
-    name: SideReturnCameraMotion
+    name: src_motion
     state_topic: "emqtt/CameraMotionSideReturn"
     payload_on: "ON"
     payload_off: "OFF"

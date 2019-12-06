@@ -1,14 +1,14 @@
   - platform: ring
 
   - platform: generic
-    name: Garage
+    name: GAC
     still_image_url: !secret ReoCameraGarageURL
     stream_source: !secret CameraGarage_Source
   - platform: generic
-    name: BackDoor
+    name: BDC
     still_image_url: !secret ReoCameraBackDoorURL
     stream_source: !secret CameraBackDoor_Source
   - platform: generic
-    name: SideReturn
+    name: SRC
     still_image_url: !secret ReoCameraSideReturneURL
     stream_source: !secret CameraSideReturn_Source
