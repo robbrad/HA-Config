@@ -569,7 +569,7 @@
     event: sunset
   action:
     service: switch.turn_on
-    entity_id: switch.Christmas_lights
+    entity_id: switch.ChristmasLights
 - id: Christmas Lights on in the morning
   alias: Christmas Lights on in the morning
   trigger:
@@ -577,7 +577,7 @@
     at: 06:00:00
   action:
     service: switch.turn_on
-    entity_id: switch.Christmas_lights
+    entity_id: switch.ChristmasLights
 - id: Christmas Lights off in the morning
   alias: Christmas Lights off in the morning
   trigger:
@@ -585,7 +585,7 @@
     at: 09:00:00
   action:
     service: switch.turn_off
-    entity_id: switch.Christmas_lights
+    entity_id: switch.ChristmasLights
 - id: Christmas Lights off at 2300
   alias: Christmas Lights off at 2300
   trigger:
@@ -593,7 +593,7 @@
     at: '23:00:00'
   action:
     service: switch.turn_off
-    entity_id: switch.Christmas_lights
+    entity_id: switch.ChristmasLights
 - id: Turn on kitchen light when there is movement
   alias: Turn on kitchen light when there is movement
   trigger:
