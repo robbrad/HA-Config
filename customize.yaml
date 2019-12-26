@@ -296,3 +296,6 @@ switch.lounge_lamp_2:
   icon: mdi:lamp
 switch.porchlight:
   icon: mdi:lightbulb-on
+switch.christmaslights:
+  friendly_name: Christmas Lights
+  icon: mdi:pine-tree

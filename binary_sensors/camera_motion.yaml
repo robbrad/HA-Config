@@ -13,3 +13,8 @@
     state_topic: "emqtt/CameraMotionSideReturn"
     payload_on: "ON"
     payload_off: "OFF"
+  - platform: mqtt
+    name: boh_motion
+    state_topic: "emqtt/CameraMotionBackOfHouse"
+    payload_on: "ON"
+    payload_off: "OFF"

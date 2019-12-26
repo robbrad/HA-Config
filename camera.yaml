@@ -10,5 +10,9 @@
     stream_source: !secret CameraBackDoor_Source
   - platform: generic
     name: SRC
-    still_image_url: !secret ReoCameraSideReturneURL
+    still_image_url: !secret ReoCameraSideReturnURL
+    stream_source: !secret CameraSideReturn_Source
+  - platform: generic
+    name: BOH
+    still_image_url: !secret ReoCameraBackOfHouseURL
     stream_source: !secret CameraSideReturn_Source
