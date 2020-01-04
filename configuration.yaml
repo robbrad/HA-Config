@@ -9,7 +9,8 @@ homeassistant:
   packages: !include_dir_named packages
   customize: !include customize.yaml
   whitelist_external_dirs:
-    - !secret dirwhitelist
+    - !secret dirwhitelist1
+    - !secret dirwhitelist2
   auth_providers:
    - type: trusted_networks
      trusted_networks:
