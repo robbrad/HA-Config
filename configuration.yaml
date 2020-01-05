@@ -99,6 +99,10 @@ tts:
 # Cloud
 cloud:
 
+zeroconf:
+
+ssdp:
+
 ####################################################
 #                                                  #
 #      LINKS TO INDIVUAL CONFIGURATION FILES       #
@@ -195,10 +199,10 @@ media_player:
 #                                                  #
 ####################################################
 wemo:
-  static:
-    - 192.168.0.61
-    - 192.168.0.62
-    - 192.168.0.63
+  discovery: true
+#    - 192.168.0.61
+#    - 192.168.0.62
+#   - 192.168.0.63
 
 eufy:
   username: !secret eufy_username
