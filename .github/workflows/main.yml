@@ -46,6 +46,7 @@ jobs:
           cd homeassistant
           source bin/activate
           python3 -m pip install --pre homeassistant
+          python3 -m pip install netdisco
         fi
 
     - name: Prep HA Config Files to work with CI
