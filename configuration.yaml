@@ -11,6 +11,7 @@ homeassistant:
   whitelist_external_dirs:
     - !secret dirwhitelist1
     - !secret dirwhitelist2
+    - !secret dirwhitelist3
   auth_providers:
    - type: trusted_networks
      trusted_networks:
