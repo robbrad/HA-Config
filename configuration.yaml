@@ -237,13 +237,13 @@ light:
       192.168.0.86:
         name: led_strip_lounge
 
-cover:
-  platform: opengarage
-  covers:
-      garage:
-        host:  192.168.0.67
-        device_key: opendoor
-        name:  GarageDoor
+#cover:
+#  platform: opengarage
+#  covers:
+#      garage:
+#        host:  192.168.0.67
+#        device_key: opendoor
+#        name:  GarageDoor
 
 panel_iframe:
   kodi_remote:
