@@ -37,7 +37,7 @@ My setup is a Python Virtual Environment utilising this [guide](https://www.home
 # Continuous Integration Continuous Deployment
 I use [GitHub Actions](https://github.com/features/actions). When I commit a change to this repo it kicks off an [automatic test](https://github.com/robbrad/HA-Config/actions) of the config using a Home Assistant environment. See [the config here](https://github.com/robbrad/HA-Config/blob/master/.github/workflows/main.yml).
 
-It's very powerful and can run parallel tests on multiple versions of Python and Home Assistant. I currently test Python 3.6, 3.7, 3.8 as well as Home Assistant Stable and Beta versions. This helps me know if my config is going to work on a later version before I upgrade.
+It's very powerful and can run parallel tests on multiple versions of Python and Home Assistant. I currently test Python 3.7 and 3.8 as well as Home Assistant Stable and Beta versions. This helps me know if my config is going to work on a later version before I upgrade.
 
 # HA-Config
 My Home Assistant Config
