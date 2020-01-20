@@ -180,7 +180,8 @@
       temperature: 25
   - service: climate.set_hvac_mode
     data:
-      hvac_mode: auto
+      entity_id: climate.underfloorheating
+      hvac_mode: heat
 - id: EnSuite underfloor heating off
   alias: EnSuite underfloor heating off
   trigger:
@@ -205,7 +206,8 @@
     entity_id: climate.underfloorheating
   - service: climate.set_hvac_mode
     data:
-      hvac_mode: false
+      entity_id: climate.underfloorheating
+      hvac_mode: off
 - id: Media Center on at Bedtime
   alias: Media Center on at Bedtime
   trigger:
