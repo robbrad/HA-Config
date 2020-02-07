@@ -120,7 +120,6 @@ automation: !include automations.yaml
 script: !include scripts.yaml
 shell_command: !include shell_commands.yaml
 binary_sensor: !include_dir_merge_list binary_sensors/
-zone: !include zones.yaml
 input_select: !include input_select.yaml
 frontend: !include frontend.yaml
 alert: !include_dir_merge_list alerts/
