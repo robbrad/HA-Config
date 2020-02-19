@@ -1,7 +1,7 @@
- # - platform: dlink_motion_sensor
- #   name: Kitchen Motion sensor
- #   host: !secret motion_kitchen_host
- #   password: !secret motion_kitchen_password
+  - platform: dlink_motion_sensor
+    name: Kitchen Motion sensor
+    host: !secret motion_kitchen_host
+    password: !secret motion_kitchen_password
 
  # - platform: dlink_motion_sensor
  #   name: Garage Motion sensor
