@@ -6,9 +6,9 @@
         value_template: '{{ value | round(1) }}'
         group_function: last
         where: time > now() - 1h
-        measurement: '"Acurite 5n1 sensor"'
+        measurement: '"Acurite-5n1"'
         field: wind_speed_kph
-        database: rtl433
+        database: rtl443
         unit_of_measurement: 'Mph'
 
   - platform: influxdb
@@ -18,9 +18,9 @@
         value_template: '{{ value | round(1) }}'
         group_function: last
         where: time > now() - 1h
-        measurement: '"Acurite 5n1 sensor"'
+        measurement: '"Acurite-5n1"'
         field: temperature_F
-        database: rtl433
+        database: rtl443
         unit_of_measurement: '°F'
 
   - platform: influxdb
@@ -30,9 +30,9 @@
         value_template: '{{ value }}'
         group_function: last
         where: time > now() - 1h
-        measurement: '"Acurite 5n1 sensor"'
+        measurement: '"Acurite-5n1"'
         field: battery
-        database: rtl433
+        database: rtl443
 
   - platform: influxdb
     host: localhost
@@ -41,9 +41,9 @@
         value_template: '{{ value }}'
         group_function: last
         where: time > now() - 1h
-        measurement: '"Oregon Scientific UVR128"'
+        measurement: '"Oregon-UVR128"'
         field: battery
-        database: rtl433
+        database: rtl443
 
   - platform: influxdb
     host: localhost
@@ -52,9 +52,9 @@
         value_template: '{{ value }}'
         group_function: last
         where: time > now() - 1h
-        measurement: '"Oregon Scientific UVR128"'
+        measurement: '"Oregon-UVR128"'
         field: uv
-        database: rtl433
+        database: rtl443
         unit_of_measurement: 'UV Index'
 
   - platform: influxdb
@@ -64,9 +64,9 @@
         value_template: '{{ value | round(1) }}'
         group_function: last
         where: time > now() - 1h
-        measurement: '"Acurite 5n1 sensor"'
+        measurement: '"Acurite-5n1"'
         field: humidity
-        database: rtl433
+        database: rtl443
         unit_of_measurement: 'bar'
 
   - platform: template

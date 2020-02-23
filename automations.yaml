@@ -612,7 +612,7 @@
       before: sunrise
   action:
     service: homeassistant.turn_on
-    entity_id: switch.KitchenLighting
+    entity_id: switch.UnderCabinetKitchenLighting
 - id: Turn off kitchen light 5 minutes after last movement
   alias: Turn off kitchen light 5 minutes after last movement
   trigger:
@@ -624,7 +624,7 @@
       minutes: 5
   action:
     service: homeassistant.turn_off
-    entity_id: switch.KitchenLighting
+    entity_id: switch.UnderCabinetKitchenLighting
 - id: Enable MQTT discovery for all devices
   alias: Enable MQTT discovery for all devices
   trigger:
