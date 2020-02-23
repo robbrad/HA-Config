@@ -47,9 +47,6 @@ utility_meter:
 #https://home-assistant.io/components/history/
 history:
 
-#https://home-assistant.io/components/sun/
-sun:
-
 #https://home-assistant.io/components/config/
 config:
 
@@ -252,14 +249,6 @@ panel_iframe:
     url: 'http://192.168.0.12:8080'
     icon: mdi:kodi
 
-####################################################
-#                                                  #
-#            Ring Door Bell                        #
-#                                                  #
-####################################################
-ring:
-  username: !secret ring_username
-  password: !secret ring_password
 
 ####################################################
 #                                                  #

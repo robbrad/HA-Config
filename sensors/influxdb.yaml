@@ -7,7 +7,7 @@
         group_function: last
         where: time > now() - 1h
         measurement: '"Acurite-5n1"'
-        field: wind_speed_kph
+        field: wind_avg_km_h
         database: rtl443
         unit_of_measurement: 'Mph'
 
