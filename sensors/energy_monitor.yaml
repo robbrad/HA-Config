@@ -5,7 +5,7 @@
 ####################################################
   - platform: emoncms
     api_key: !secret emoncms
-    url: http://192.168.0.69/emoncms/
+    url: http://192.168.1.62/emoncms/
     id: 6
 
   - platform: template

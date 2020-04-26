@@ -120,10 +120,10 @@
     event: sunset
   action:
   - data:
-      entity_id: switch.ethansbedroomlight
+      entity_id: switch.ethansbedroomlamp
     service: switch.turn_on
   - data:
-      entity_id: switch.ionabedroom
+      entity_id: switch.ionasbedroomlamp
     service: switch.turn_on
 - id: Ethans Bedroom Lamp off
   alias: Kids Bedroom Lamps off
@@ -132,10 +132,10 @@
     platform: time
   action:
   - data:
-      entity_id: switch.ethansbedroomlight
+      entity_id: switch.ethansbedroomlamp
     service: switch.turn_off
   - data:
-      entity_id: switch.ionabedroom
+      entity_id: switch.ionasbedroomlamp
     service: switch.turn_off
 - id: Electric Blanket on at 930
   alias: Electric Blanket on at 930
@@ -256,7 +256,7 @@
   alias: Scan for Objects at Frontdoor when motion detected
   trigger:
   - platform: state
-    entity_id: binary_sensor.ring_frontdoor_motion
+    entity_id: binary_sensor.frontdoor_motion
     to: 'on'
   action:
   - service: camera.snapshot
@@ -284,7 +284,7 @@
   alias: Scan for Objects at Floodlight when motion detected
   trigger:
   - platform: state
-    entity_id: binary_sensor.ring_frontfloodlight_motion
+    entity_id: binary_sensor.frontfloodlight_motion
     to: 'on'
   action:
   - service: camera.snapshot
@@ -298,7 +298,7 @@
   alias: Scan for Car Registrations at Floodlight when motion detected
   trigger:
   - platform: state
-    entity_id: binary_sensor.ring_frontfloodlight_motion
+    entity_id: binary_sensor.frontfloodlight_motion
     to: 'on'
   action:
   - service: image_processing.scan
@@ -391,9 +391,10 @@
     service: switch.turn_on
     entity_id:
     - group.livingroomlights
-    - switch.hallwaylight
-    - switch.ethansbedroomlight
-    - switch.ionabedroom
+    - switch.hallwaylamp
+    - switch.kitchenlamp
+    - switch.ethansbedroomlamp
+    - switch.ionasbedroomlamp
 - id: Lights off when away and past midnight
   alias: Lights off when away and past midnight
   trigger:
@@ -403,18 +404,19 @@
     service: switch.turn_off
     entity_id:
     - group.livingroomlights
-    - switch.hallwaylight
-    - switch.ethansbedroomlight
-    - switch.ionabedroom
+    - switch.hallwaylamp
+    - switch.kitchenlamp
+    - switch.ethansbedroomlamp
+    - switch.ionasbedroomlamp
 - id: Turn on Porch light on when there is movement
   alias: Turn on Porch light on when there is movement
   trigger:
   - platform: state
-    entity_id: binary_sensor.ring_frontfloodlight_motion
+    entity_id: binary_sensor.frontfloodlight_motion
     from: 'off'
     to: 'on'
   - platform: state
-    entity_id: binary_sensor.ring_frontdoor_motion
+    entity_id: binary_sensor.frontdoor_motion
     from: 'off'
     to: 'on'
   condition:
@@ -449,12 +451,12 @@
 - id: Turn off Porch light 5 minutes after last movement
   alias: Turn off Porch light 5 minutes after last movement
   trigger:
-  - entity_id: binary_sensor.ring_frontfloodlight_motion
+  - entity_id: binary_sensor.frontfloodlight_motion
     for: 0:05:00
     from: 'on'
     platform: state
     to: 'off'
-  - entity_id: binary_sensor.ring_frontdoor_motion
+  - entity_id: binary_sensor.frontdoor_motion
     for: 0:05:00
     from: 'on'
     platform: state
@@ -515,7 +517,7 @@
     event: sunset
   action:
     service: switch.turn_on
-    entity_id: switch.hallwaylight
+    entity_id: switch.hallwaylamp
 - id: Hallway Light off at 2330
   alias: Hallway Light off at 2330
   trigger:
@@ -523,7 +525,23 @@
     at: '23:30:00'
   action:
     service: switch.turn_off
-    entity_id: switch.hallwaylight
+    entity_id: switch.hallwaylamp
+- id: Kitchen Lamp on at sunset
+  alias: Kitchen Lamp on at sunset
+  trigger:
+  - platform: sun
+    event: sunset
+  action:
+    service: switch.turn_on
+    entity_id: switch.kitchenlamp
+- id: Kitchen Lamp off at 2330
+  alias: Kitchen Lamp off at 2330
+  trigger:
+  - platform: time
+    at: '23:30:00'
+  action:
+    service: switch.turn_off
+    entity_id: switch.kitchenlamp
 - id: Turn on Hallway light when there is movement
   alias: Turn on Hallway light when there is movement
   trigger:
@@ -539,11 +557,11 @@
     - condition: sun
       before: sunrise
     - condition: state
-      entity_id: switch.hallwaylight
+      entity_id: switch.hallwaylamp
       state: 'Off'
   action:
     service: homeassistant.turn_on
-    entity_id: switch.hallwaylight
+    entity_id: switch.hallwaylamp
 - id: Turn off Hallway light 5 minutes after last movement
   alias: Turn off Hallway light 5 minutes after last movement
   trigger:
@@ -563,7 +581,7 @@
       before_offset: 01:00:00
   action:
     service: homeassistant.turn_off
-    entity_id: switch.hallwaylight
+    entity_id: switch.hallwaylamp
 - id: Christmas Lights on at sunset
   alias: Christmas Lights on at sunset
   trigger:
@@ -612,7 +630,7 @@
       before: sunrise
   action:
     service: homeassistant.turn_on
-    entity_id: switch.UnderCabinetKitchenLighting
+    entity_id: switch.kitchencabinetlighting
 - id: Turn off kitchen light 5 minutes after last movement
   alias: Turn off kitchen light 5 minutes after last movement
   trigger:
@@ -624,7 +642,29 @@
       minutes: 5
   action:
     service: homeassistant.turn_off
-    entity_id: switch.UnderCabinetKitchenLighting
+    entity_id: switch.kitchencabinetlighting
+- id: Turn on Garage light when there is movement
+  alias: Turn on Garage light when there is movement
+  trigger:
+    platform: state
+    entity_id: binary_sensor.garage_motion_sensor
+    from: 'off'
+    to: 'on'
+  action:
+    service: homeassistant.turn_on
+    entity_id: switch.garagebenchlight
+- id: Turn off Garage light 5 minutes after last movement
+  alias: Turn off Garage light 5 minutes after last movement
+  trigger:
+    platform: state
+    entity_id: binary_sensor.garage_motion_sensor
+    to: 'off'
+    from: 'on'
+    for:
+      minutes: 5
+  action:
+    service: homeassistant.turn_off
+    entity_id: switch.garagebenchlight
 - id: Enable MQTT discovery for all devices
   alias: Enable MQTT discovery for all devices
   trigger:

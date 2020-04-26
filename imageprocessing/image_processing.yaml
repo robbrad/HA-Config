@@ -35,44 +35,53 @@
     model:
       graph: /home/rob/.homeassistant/tensorflow/frozen_inference_graph.pb
 
-  - platform: facebox
-    ip_address: localhost
-    port: 8088
-    source:
-      - entity_id: camera.frontdoor
-
   - platform: amazon_rekognition
     aws_access_key_id: !secret aws_access_key
     aws_secret_access_key: !secret aws_secret_key
     region_name: eu-west-1
-    target: Person
+    target: Car
     scan_interval: 604800
     source:
-      - entity_id: camera.gac
+      - entity_id: camera.frontfloodlight
 
-  - platform: amazon_rekognition
-    aws_access_key_id: !secret aws_access_key
-    aws_secret_access_key: !secret aws_secret_key
-    region_name: eu-west-1
-    target: Person
-    scan_interval: 604800
-    source:
-      - entity_id: camera.src
+#  - platform: facebox
+#    ip_address: localhost
+#    port: 8088
+#    source:
+#      - entity_id: camera.frontdoor
 
-  - platform: amazon_rekognition
-    aws_access_key_id: !secret aws_access_key
-    aws_secret_access_key: !secret aws_secret_key
-    region_name: eu-west-1
-    target: Person
-    scan_interval: 604800
-    source:
-      - entity_id: camera.bdc
-
-  - platform: amazon_rekognition
-    aws_access_key_id: !secret aws_access_key
-    aws_secret_access_key: !secret aws_secret_key
-    region_name: eu-west-1
-    target: Person
-    scan_interval: 604800
-    source:
-      - entity_id: camera.boh
+# - platform: amazon_rekognition
+#   aws_access_key_id: !secret aws_access_key
+#   aws_secret_access_key: !secret aws_secret_key
+#   region_name: eu-west-1
+#   target: Person
+#   scan_interval: 604800
+#   source:
+#     - entity_id: camera.gac
+#
+# - platform: amazon_rekognition
+#   aws_access_key_id: !secret aws_access_key
+#   aws_secret_access_key: !secret aws_secret_key
+#   region_name: eu-west-1
+#   target: Person
+#   scan_interval: 604800
+#   source:
+#     - entity_id: camera.src
+#
+# - platform: amazon_rekognition
+#   aws_access_key_id: !secret aws_access_key
+#   aws_secret_access_key: !secret aws_secret_key
+#   region_name: eu-west-1
+#   target: Person
+#   scan_interval: 604800
+#   source:
+#     - entity_id: camera.bdc
+#
+# - platform: amazon_rekognition
+#   aws_access_key_id: !secret aws_access_key
+#   aws_secret_access_key: !secret aws_secret_key
+#   region_name: eu-west-1
+#   target: Person
+#   scan_interval: 604800
+#   source:
+#     - entity_id: camera.boh

@@ -3,19 +3,17 @@
     host: !secret motion_kitchen_host
     password: !secret motion_kitchen_password
 
- # - platform: dlink_motion_sensor
- #   name: Garage Motion sensor
- #   host: !secret motion_garage_host
- #   password: !secret motion_garage_password
+  - platform: dlink_motion_sensor
+    name: Garage Motion sensor
+    host: !secret motion_garage_host
+    password: !secret motion_garage_password
 
   - platform: dlink_motion_sensor
     name: Landing Motion sensor
     host: !secret motion_landing_host
     password: !secret motion_landing_password
 
-# - platform: dlink_motion_sensor
-#   name: Hallway Motion sensor
-#   host: !secret motion_hallway_host
-#   password: !secret motion_hallway_password
-
-  - platform: ring
+  - platform: dlink_motion_sensor
+    name: Hallway Motion sensor
+    host: !secret motion_hallway_host
+    password: !secret motion_hallway_password
