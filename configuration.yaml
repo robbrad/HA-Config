@@ -149,22 +149,6 @@ nest:
 
 ####################################################
 #                                                  #
-#                   WEBLINKS                       #
-#                                                  #
-####################################################
-
-#https://home-assistant.io/components/weblink/
-weblink:
-  entities:
-    - name: Home Assistant Webpage
-      url: https://home-assistant.io/
-    - name: Home Assistant Forum
-      url: https://community.home-assistant.io/
-    - name: Home Assistant Chat
-      url: https://discordapp.com/channels/330944238910963714/330944238910963714
-
-####################################################
-#                                                  #
 #                     MQTT                         #
 #                                                  #
 ####################################################
