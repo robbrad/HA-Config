@@ -390,7 +390,8 @@
   action:
     service: switch.turn_on
     entity_id:
-    - group.livingroomlights
+    - switch.lounge_lamp_1
+    - switch.lounge_lamp_2
     - switch.hallwaylamp
     - switch.kitchenlamp
     - switch.ethansbedroomlamp
@@ -403,7 +404,8 @@
   action:
     service: switch.turn_off
     entity_id:
-    - group.livingroomlights
+    - switch.lounge_lamp_1
+    - switch.lounge_lamp_2
     - switch.hallwaylamp
     - switch.kitchenlamp
     - switch.ethansbedroomlamp
@@ -482,7 +484,9 @@
       hours: 12
   action:
     service: homeassistant.turn_off
-    entity_id: group.guest_wifi_switches
+    entity_id:
+      - switch.guestwifimain
+      - switch.guestwifiupstairs
 - id: Lights off at Bedtime
   alias: Lights off at Bedtime
   trigger:
@@ -499,7 +503,9 @@
       state: 'off'
   action:
     service: switch.turn_off
-    entity_id: group.livingroomlights
+    entity_id: 
+      - switch.lounge_lamp_1
+      - switch.lounge_lamp_2
 - id: AmbiLight off when TV is off
   alias: AmbiLight off when TV is off
   trigger:
@@ -509,7 +515,7 @@
     from: playing
   action:
     service: homeassistant.turn_off
-    entity_id: group.ambitv_switches
+    entity_id: switch.ambitvmode1
 - id: Hallway Light on at sunset
   alias: Hallway Light on at sunset
   trigger:
