@@ -110,7 +110,7 @@ ssdp:
 ####################################################
 
 #https://home-assistant.io/docs/configuration/splitting_configuration/
-group: !include groups.yaml
+#group: !include groups.yaml
 device_tracker: !include device_tracker.yaml
 notify: !include_dir_merge_list notification/
 switch: !include_dir_merge_list switches/
