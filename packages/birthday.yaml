@@ -73,7 +73,7 @@ automation:
 
 - alias: Birthday Countdown 30 Days
   initial_state: true
-  hide_entity: true
+  #hide_entity: true
   trigger:
     platform: state
     entity_id:
@@ -101,7 +101,7 @@ automation:
 
 - alias: Today is the Birthday
   initial_state: true
-  hide_entity: true
+  #hide_entity: true
   trigger:
     platform: state
     entity_id:
@@ -177,7 +177,7 @@ automation:
 
 - alias: Update Birthdays
   initial_state: true
-  hide_entity: true
+  #hide_entity: true
   trigger:
     - platform: time_pattern
       minutes: '/5'

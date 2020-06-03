@@ -11,6 +11,6 @@
       gps_robsiphone:
         value_template: '{{ states.device_tracker.robsiphone.attributes.gps_accuracy | round(0) }}'
 
-      interval_robsiphone:
-        unit_of_measurement: 'min'
-        value_template: '{{ states.device_tracker.robsiphone.attributes.interval | round(0) }}'
+#      interval_robsiphone:
+#        unit_of_measurement: 'min'
+#        value_template: '{{ states.device_tracker.robsiphone.attributes.interval | round(0) }}'

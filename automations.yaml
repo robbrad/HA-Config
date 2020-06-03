@@ -717,7 +717,6 @@
     entity_id: switch.billioninternet
 - id: '1570742635270'
   alias: Upgrade Home Assistant
-  description: ''
   trigger:
   - entity_id: input_boolean.upgradehomeassistant
     from: 'off'

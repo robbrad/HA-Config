@@ -5,6 +5,12 @@
 ####################################################
 #https://home-assistant.io/docs/configuration/basic/
 homeassistant:
+  auth_providers:
+   - type: trusted_networks
+     trusted_networks:
+       - 192.168.0.0/23
+       - 10.8.0.0/24
+       - 172.17.0.0/24
   # Customization file
   packages: !include_dir_named packages
   customize: !include customize.yaml
@@ -12,13 +18,8 @@ homeassistant:
     - !secret dirwhitelist1
     - !secret dirwhitelist2
     - !secret dirwhitelist3
-  auth_providers:
-   - type: trusted_networks
-     trusted_networks:
-       - 192.168.0.0/23
-       - 10.8.0.0/24
-       - 172.17.0.0/24
-
+  external_url: http://192.168.0.30:8123/
+  internal_url: http://192.168.0.30:8123/
 
 system_health:
 
@@ -254,7 +255,6 @@ eufy_vacuum:
     access_token: !secret EufyRoboVacKey
     id: !secret EufyRoboVacID
     type: T2118
-
 tplink:
   #discovery: true
   switch:

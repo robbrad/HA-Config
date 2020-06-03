@@ -8,7 +8,7 @@
         where: time > now() - 1h
         measurement: '"Acurite-5n1"'
         field: wind_avg_km_h
-        database: rtl443
+        database: rtl433
         unit_of_measurement: 'Mph'
 
   - platform: influxdb
@@ -20,7 +20,7 @@
         where: time > now() - 1h
         measurement: '"Acurite-5n1"'
         field: temperature_F
-        database: rtl443
+        database: rtl433
         unit_of_measurement: '°F'
 
   - platform: influxdb
@@ -32,7 +32,7 @@
         where: time > now() - 1h
         measurement: '"Acurite-5n1"'
         field: battery
-        database: rtl443
+        database: rtl433
 
   - platform: influxdb
     host: localhost
@@ -43,7 +43,7 @@
         where: time > now() - 1h
         measurement: '"Oregon-UVR128"'
         field: battery
-        database: rtl443
+        database: rtl433
 
   - platform: influxdb
     host: localhost
@@ -54,7 +54,7 @@
         where: time > now() - 1h
         measurement: '"Oregon-UVR128"'
         field: uv
-        database: rtl443
+        database: rtl433
         unit_of_measurement: 'UV Index'
 
   - platform: influxdb
@@ -66,7 +66,7 @@
         where: time > now() - 1h
         measurement: '"Acurite-5n1"'
         field: humidity
-        database: rtl443
+        database: rtl433
         unit_of_measurement: 'bar'
 
   - platform: template
