@@ -28,9 +28,10 @@ jobs:
         python3 -m pip install --upgrade pip setuptools aiohttp_cors wheel colorlog==4.0.2
         sudo apt-get update -qq
         sudo apt-get install -y libudev-dev python-dev pkg-config libavformat-dev libavcodec-dev libavdevice-dev libavutil-dev libswscale-dev libavresample-dev libavfilter-dev
+        pip install --upgrade pip
         for file in $(find custom_components/ -name "manifest.json"); do
           cat "$file" | for req in $(jq .requirements[]);
-            do pip3 install -e $(echo "$req" | jq -r .);
+            do pip3 install $(echo "$req" | jq -r .);
             done;
           done
 

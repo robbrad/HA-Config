@@ -19,7 +19,7 @@ from homeassistant.helpers.aiohttp_client import async_get_clientsession
 
 _LOGGER = logging.getLogger(__name__)
 
-REQUIREMENTS = ['PySimpleSOAP==1.16']
+REQUIREMENTS = ['PySimpleSOAP==1.16.2']
 
 DEFAULT_NAME = 'D-Link Motion Sensor'
 DEFAULT_USERNAME = 'Admin'
