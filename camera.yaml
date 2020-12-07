@@ -7,10 +7,35 @@
     still_image_url: !secret ReoCameraBackDoorURL
     stream_source: !secret CameraBackDoor_Source
   - platform: generic
-    name: SRC
+    name: LSC
     still_image_url: !secret ReoCameraSideReturnURL
     stream_source: !secret CameraSideReturn_Source
   - platform: generic
-    name: BOH
-    still_image_url: !secret ReoCameraBackOfHouseURL
-    stream_source: !secret CameraSideReturn_Source
+    name: BGC
+    still_image_url: !secret ReoCameraBackGardenURL
+    stream_source: !secret CameraBackGarden_Source
+  - platform: generic
+    name: RSC
+    still_image_url: !secret ReoCameraShedReturnURL
+    stream_source: !secret CameraShedReturn_Source
+  - platform: local_file
+    name: GAC_pd
+    file_path: "/mnt/squeeze_media/Fileserver/Rob/deepstacksnapshots/deepstack_object_gac_latest.jpg"
+  - platform: local_file
+    name: LSC_pd
+    file_path: "/mnt/squeeze_media/Fileserver/Rob/deepstacksnapshots/deepstack_object_lsc_latest.jpg"
+  - platform: local_file
+    name: RSC_pd
+    file_path: "/mnt/squeeze_media/Fileserver/Rob/deepstacksnapshots/deepstack_object_rsc_latest.jpg"
+  - platform: local_file
+    name: BGC_pd
+    file_path: "/mnt/squeeze_media/Fileserver/Rob/deepstacksnapshots/deepstack_object_bgc_latest.jpg"
+  - platform: local_file
+    name: BDC_pd
+    file_path: "/mnt/squeeze_media/Fileserver/Rob/deepstacksnapshots/deepstack_object_bdc_latest.jpg"
+  - platform: local_file
+    name: frontdoor_pd
+    file_path: "/mnt/squeeze_media/Fileserver/Rob/deepstacksnapshots/deepstack_object_frontdoor_latest.jpg"
+  - platform: local_file
+    name: frontfloodlight_pd
+    file_path: "/mnt/squeeze_media/Fileserver/Rob/deepstacksnapshots/deepstack_object_frontfloodlight_latest.jpg"

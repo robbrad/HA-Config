@@ -9,12 +9,17 @@
     payload_on: "ON"
     payload_off: "OFF"
   - platform: mqtt
-    name: src_motion
-    state_topic: "emqtt/CameraMotionSideReturn"
+    name: lsc_motion
+    state_topic: "emqtt/CameraMotionLeftSideReturn"
     payload_on: "ON"
     payload_off: "OFF"
   - platform: mqtt
-    name: boh_motion
-    state_topic: "emqtt/CameraMotionBackOfHouse"
+    name: bgc_motion
+    state_topic: "emqtt/CameraMotionBackGarden"
+    payload_on: "ON"
+    payload_off: "OFF"
+  - platform: mqtt
+    name: rsc_motion
+    state_topic: "emqtt/CameraMotionRightSideReturn"
     payload_on: "ON"
     payload_off: "OFF"

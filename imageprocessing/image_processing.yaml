@@ -5,35 +5,84 @@
     source:
      - entity_id: camera.frontfloodlight
 
-  - platform: tensorflow
-    scan_interval: 600
-    source:
-      - entity_id: camera.frontdoor
-    file_out:
-      - "/tmp/frontdoor_{{ now().strftime('%Y%m%d_%H%M%S') }}.jpg"
-    model:
-      graph: /home/rob/.homeassistant/tensorflow/frozen_inference_graph.pb
-      area:
-        # Exclude top 13% of image
-        top: 0.07
-
-  - platform: tensorflow
-    scan_interval: 600
+  - platform: deepstack_object
+    ip_address: localhost
+    port: 5000
+    save_file_folder: /mnt/squeeze_media/Fileserver/Rob/deepstacksnapshots/
+    save_timestamped_file: True
+    show_boxes: True
+    targets:
+      - person
+      - car
     source:
       - entity_id: camera.frontfloodlight
-    file_out:
-      - "/tmp/frontfloodlight_{{ now().strftime('%Y%m%d_%H%M%S') }}.jpg"
-    model:
-      graph: /home/rob/.homeassistant/tensorflow/frozen_inference_graph.pb
 
-  - platform: tensorflow
-    scan_interval: 600
+  - platform: deepstack_object
+    ip_address: localhost
+    port: 5000
+    save_file_folder: /mnt/squeeze_media/Fileserver/Rob/deepstacksnapshots/
+    save_timestamped_file: True
+    show_boxes: True
+    targets:
+      - person
+      - car
     source:
-      - entity_id: camera.garage
-    file_out:
-      - "/tmp/garage_{{ now().strftime('%Y%m%d_%H%M%S') }}.jpg"
-    model:
-      graph: /home/rob/.homeassistant/tensorflow/frozen_inference_graph.pb
+      - entity_id: camera.frontdoor
+
+  - platform: deepstack_object
+    ip_address: localhost
+    port: 5000
+    save_file_folder: /mnt/squeeze_media/Fileserver/Rob/deepstacksnapshots/
+    save_timestamped_file: True
+    show_boxes: True
+    targets:
+      - person
+    source:
+      - entity_id: camera.GAC
+
+  - platform: deepstack_object
+    ip_address: localhost
+    port: 5000
+    save_file_folder: /mnt/squeeze_media/Fileserver/Rob/deepstacksnapshots/
+    save_timestamped_file: True
+    show_boxes: True
+    targets:
+      - person
+    source:
+      - entity_id: camera.BDC
+
+  - platform: deepstack_object
+    ip_address: localhost
+    port: 5000
+    save_file_folder: /mnt/squeeze_media/Fileserver/Rob/deepstacksnapshots/
+    save_timestamped_file: True
+    show_boxes: True
+    targets:
+      - person
+    source:
+      - entity_id: camera.LSC
+
+  - platform: deepstack_object
+    ip_address: localhost
+    port: 5000
+    save_file_folder: /mnt/squeeze_media/Fileserver/Rob/deepstacksnapshots/
+    save_timestamped_file: True
+    show_boxes: True
+    targets:
+      - person
+    source:
+      - entity_id: camera.BGC
+  
+  - platform: deepstack_object
+    ip_address: localhost
+    port: 5000
+    save_file_folder: /mnt/squeeze_media/Fileserver/Rob/deepstacksnapshots/
+    save_timestamped_file: True
+    show_boxes: True
+    targets:
+      - person
+    source:
+      - entity_id: camera.RSC
 
   - platform: amazon_rekognition
     aws_access_key_id: !secret aws_access_key
@@ -43,45 +92,3 @@
     scan_interval: 604800
     source:
       - entity_id: camera.frontfloodlight
-
-#  - platform: facebox
-#    ip_address: localhost
-#    port: 8088
-#    source:
-#      - entity_id: camera.frontdoor
-
-# - platform: amazon_rekognition
-#   aws_access_key_id: !secret aws_access_key
-#   aws_secret_access_key: !secret aws_secret_key
-#   region_name: eu-west-1
-#   target: Person
-#   scan_interval: 604800
-#   source:
-#     - entity_id: camera.gac
-#
-# - platform: amazon_rekognition
-#   aws_access_key_id: !secret aws_access_key
-#   aws_secret_access_key: !secret aws_secret_key
-#   region_name: eu-west-1
-#   target: Person
-#   scan_interval: 604800
-#   source:
-#     - entity_id: camera.src
-#
-# - platform: amazon_rekognition
-#   aws_access_key_id: !secret aws_access_key
-#   aws_secret_access_key: !secret aws_secret_key
-#   region_name: eu-west-1
-#   target: Person
-#   scan_interval: 604800
-#   source:
-#     - entity_id: camera.bdc
-#
-# - platform: amazon_rekognition
-#   aws_access_key_id: !secret aws_access_key
-#   aws_secret_access_key: !secret aws_secret_key
-#   region_name: eu-west-1
-#   target: Person
-#   scan_interval: 604800
-#   source:
-#     - entity_id: camera.boh

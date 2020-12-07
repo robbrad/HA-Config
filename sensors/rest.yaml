@@ -8,6 +8,20 @@
       Authorization: !secret HAApiAuth
 
   - platform: rest
+    name: 3d_printer
+    value_template: '{{ value_json }}'
+    resource: http://192.168.0.120/api/printer?history=true&limit=1
+    scan_interval: 300
+    json_attributes:
+      - state
+      - temperature
+      - sd
+  - platform: template
+    sensors:
+      3dprinterstatus: 
+        value_template: '{{ states.sensor.pws_report.attributes.state[0].text }}'
+
+  - platform: rest
     name: pws_report
     json_attributes:
       - observations

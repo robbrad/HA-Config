@@ -1,11 +1,10 @@
-  livingroomlights:
-    name: Living Room Lamps
+  LoungeLamps:
+    name: Lounge Lamps
     entities:
       - switch.Lounge_Lamp_1
       - switch.Lounge_Lamp_2
 
-  AmbiTv Switches:
-    control: hidden
+  AmbiTvSwitches:
     entities:
       - switch.ambitvmode1
       - switch.ambitvmode2

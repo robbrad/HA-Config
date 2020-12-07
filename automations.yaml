@@ -252,6 +252,7 @@
         push:
           badge: 0
           category: desktop
+
 - id: Scan for Objects at Frontdoor when motion detected
   alias: Scan for Objects at Frontdoor when motion detected
   trigger:
@@ -262,24 +263,91 @@
   - service: camera.snapshot
     data:
       entity_id: camera.frontdoor
-      filename: /var/www/html/motion_detection/frontdoor_latest.jpg
+      filename: "/home/rob/.homeassistant/www/camera_snapshot/frontdoor_latest.jpg"
   - service: image_processing.scan
     data:
-      entity_id: image_processing.tensorflow_frontdoor
+      entity_id: image_processing.deepstack_object_frontdoor
+
 - id: Scan for Objects in Garage when motion detected
   alias: Scan for Objects in Garage when motion detected
   trigger:
   - platform: state
-    entity_id: binary_sensor.garage_motion_sensor
+    entity_id: binary_sensor.gac_motion
     to: 'on'
   action:
   - service: camera.snapshot
     data:
-      entity_id: camera.garage
-      filename: /var/www/html/motion_detection/garage_latest.jpg
+      entity_id: camera.GAC
+      filename: "/home/rob/.homeassistant/www/camera_snapshot/gac_latest.jpg"
   - service: image_processing.scan
     data:
-      entity_id: image_processing.tensorflow_garage
+      entity_id: image_processing.deepstack_object_gac
+  - delay: 00:00:01
+
+- id: Scan for Objects at Right Side Camera when motion detected
+  alias: Scan for Objects at Right Side Camera when motion detected
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.rsc_motion
+    to: 'on'
+  action:
+  - service: camera.snapshot
+    data:
+      entity_id: camera.RSC
+      filename: "/home/rob/.homeassistant/www/camera_snapshot/rsc_latest.jpg"
+  - service: image_processing.scan
+    data:
+      entity_id: image_processing.deepstack_object_rsc
+  - delay: 00:00:01
+
+- id: Scan for Objects at Left Side Camera when motion detected
+  alias: Scan for Objects at Left Side Camera when motion detected
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.lsc_motion
+    to: 'on'
+  action:
+  - service: camera.snapshot
+    data:
+      entity_id: camera.LSC
+      filename: "/home/rob/.homeassistant/www/camera_snapshot/lsc_latest.jpg"
+  - service: image_processing.scan
+    data:
+      entity_id: image_processing.deepstack_object_lsc
+  - delay: 00:00:01
+
+- id: Scan for Objects at Backdoor Camera when motion detected
+  alias: Scan for Objects at Backdoor Camera when motion detected
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.bdc_motion
+    to: 'on'
+  action:
+  - service: camera.snapshot
+    data:
+      entity_id: camera.BDC
+      filename: "/home/rob/.homeassistant/www/camera_snapshot/bdc_latest.jpg"
+  - service: image_processing.scan
+    data:
+      entity_id: image_processing.deepstack_object_bdc
+  - delay: 00:00:01
+
+- id: Scan for Objects at Back Garden Camera when motion detected
+  alias: Scan for Objects at Back Garden Camera when motion detected
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.bgc_motion
+    to: 'on'
+  action:
+  - service: camera.snapshot
+    data:
+      entity_id: camera.BGC
+      filename: "/home/rob/.homeassistant/www/camera_snapshot/bgc_latest.jpg"
+  - service: image_processing.scan
+    data:
+      entity_id: image_processing.deepstack_object_bgc
+  - delay: 00:00:01
+
 - id: Scan for Objects at Floodlight when motion detected
   alias: Scan for Objects at Floodlight when motion detected
   trigger:
@@ -290,10 +358,12 @@
   - service: camera.snapshot
     data:
       entity_id: camera.frontfloodlight
-      filename: /var/www/html/motion_detection/frontfloodlight_latest.jpg
+      filename: "/home/rob/.homeassistant/www/camera_snapshot/frontfloodlight_latest.jpg"
   - service: image_processing.scan
     data:
-      entity_id: image_processing.tensorflow_frontfloodlight
+      entity_id: image_processing.deepstack_object_frontfloodlight
+  - delay: 00:00:01
+
 - id: Scan for Car Registrations at Floodlight when motion detected
   alias: Scan for Car Registrations at Floodlight when motion detected
   trigger:
@@ -304,6 +374,23 @@
   - service: image_processing.scan
     data:
       entity_id: image_processing.openalpr_frontfloodlight
+
+- id: Door Bell Pushed Take Snapshot
+  alias: Door Bell Pushed Take Snapshot
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.frontdoor_ding
+    to: 'on'
+  action:
+  - service: camera.snapshot
+    data:
+      entity_id: camera.frontdoor
+      filename: "/home/rob/.homeassistant/www/camera_snapshot/frontdoor_ring_{{ now ().year }}{{ now ().month }}{{ now ().day }}-{{ now ().hour }}{{ now ().minute }}.jpg"
+  - service: camera.snapshot
+    data:
+      entity_id: camera.frontdoor
+      filename: "/home/rob/.homeassistant/www/camera_snapshot/frontdoor_ring_latest.jpg"
+
 - id: Switch on away mode
   alias: Switch on away mode
   trigger:
@@ -595,7 +682,7 @@
     event: sunset
   action:
     service: switch.turn_on
-    entity_id: switch.ChristmasLights
+    entity_id: switch.christmaslights
 - id: Christmas Lights on in the morning
   alias: Christmas Lights on in the morning
   trigger:
@@ -603,7 +690,7 @@
     at: 06:00:00
   action:
     service: switch.turn_on
-    entity_id: switch.ChristmasLights
+    entity_id: switch.christmaslights
 - id: Christmas Lights off in the morning
   alias: Christmas Lights off in the morning
   trigger:
@@ -611,7 +698,7 @@
     at: 09:00:00
   action:
     service: switch.turn_off
-    entity_id: switch.ChristmasLights
+    entity_id: switch.christmaslights
 - id: Christmas Lights off at 2300
   alias: Christmas Lights off at 2300
   trigger:
@@ -619,7 +706,7 @@
     at: '23:00:00'
   action:
     service: switch.turn_off
-    entity_id: switch.ChristmasLights
+    entity_id: switch.christmaslights
 - id: Turn on kitchen light when there is movement
   alias: Turn on kitchen light when there is movement
   trigger:
