@@ -13,8 +13,7 @@
         <img src="https://img.shields.io/badge/dynamic/json?label=Latest%20HA%20Version&query=%24.info.version&url=https%3A%2F%2Fpypi.python.org%2Fpypi%2Fhomeassistant%2Fjson" /></a>
         <a href="https://github.com/robbrad/" alt="Last Commit">
         <img src="https://img.shields.io/github/last-commit/robbrad/HA-Config" /></a>
-        <a href="https://github.com/robbrad/HA-Config/stargazers"><img src="https://img.shields.io/github/stars/robbrad/HA-Config.svg?style=plasticr"/></a>
-       
+        <a href="https://github.com/robbrad/HA-Config/stargazers"><img src="https://img.shields.io/github/stars/robbrad/HA-Config.svg?style=plasticr"/></a>     
 </p>
 
 <p align="center">
