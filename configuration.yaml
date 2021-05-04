@@ -254,7 +254,7 @@ panel_iframe:
 ####################################################
 somfy:
   client_id: !secret somfy_client_id
-  client_secret: !secret client_secret
+  client_secret: !secret somfy_client_secret
 
 
 
