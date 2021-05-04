@@ -29,7 +29,9 @@ system_health:
 influxdb:
   host: 192.168.0.30
   port: 8086
-  bucket: influx_bucket
+  api_version: 2
+  bucket: willow-lane-influx
+  organization: willow-lane
   token: !secret influxdb_token
 
 utility_meter:
