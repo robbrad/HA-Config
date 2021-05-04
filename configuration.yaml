@@ -30,7 +30,7 @@ influxdb:
   host: 192.168.0.30
   port: 8086
   api_version: 2
-  bucket: willow-lane-influx
+  bucket: home-assistant
   organization: willow-lane
   token: !secret influxdb_token
 
