@@ -1,3 +1,17 @@
+  # Octprint Enclosure Plugin
+  - platform: rest
+    name: printer_enclosure_temp
+    device_class: temperature
+    unit_of_measurement: "°C"
+    resource: http://192.168.0.44/plugin/enclosure/inputs/1
+    value_template: '{{ value_json.temp_sensor_temp }}'
+  - platform: rest
+    name: printer_enclosure_hum
+    device_class: humidity
+    unit_of_measurement: "%"
+    resource: http://192.168.0.44/plugin/enclosure/inputs/1
+    value_template: '{{ value_json.temp_sensor_humidity }}'
+
   - platform: rest
     resource: http://192.168.0.30:8123/api/config/core/check_config
     name: ConfigValidationRest
@@ -6,20 +20,6 @@
     value_template: '{{ value_json.result }}'
     headers:
       Authorization: !secret HAApiAuth
-
-  - platform: rest
-    name: 3d_printer
-    value_template: '{{ value_json }}'
-    resource: http://192.168.0.120/api/printer?history=true&limit=1
-    scan_interval: 300
-    json_attributes:
-      - state
-      - temperature
-      - sd
-  - platform: template
-    sensors:
-      3dprinterstatus: 
-        value_template: '{{ states.sensor.pws_report.attributes.state[0].text }}'
 
   - platform: rest
     name: pws_report

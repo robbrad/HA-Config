@@ -56,32 +56,46 @@
         }} today.
       target: device/robsphone
       title: Rob Time to Leave for Work
-- id: Garage Door Opening Alert
-  alias: Garage Door Opening Alert
+- id: Garage Door Open Alert
+  alias: Notif when garage door opens
   trigger:
   - platform: state
-    entity_id: sensor.garage_door_status
-    to: Opening
-    from: Closed
+    entity_id: cover.garage_door
+    to: open
   action:
-  - service: notify.push_bullet
+  - service: notify.telegram
     data:
-      target: device/robsphone
-      message: The Garage Door is opening
-      title: Garage Door Opening
-- id: Garage Door Closing Alert
-  alias: Garage Door Closing Alert
+      title: Garage Door Status
+      message: Garage Door just opened
+      data:
+        photo:
+        - url: !secret ReoCameraGarageURL
+          caption: Garage Door Opened
+- id: Garage Door Closed Alert
+  alias: Notify when garage door closes
   trigger:
   - platform: state
-    entity_id: sensor.garage_door_status
-    to: Closing
-    from: Open
+    entity_id: cover.garage_door
+    to: closed
   action:
-  - service: notify.push_bullet
+  - service: notify.telegram
     data:
-      target: device/robsphone
-      message: The Garage Door closing
-      title: Garage Door Closing
+      title: Garage Door Status
+      message: Garage Door just closed
+      data:
+        photo:
+        - url: !secret ReoCameraGarageURL
+          caption: Garage Door Closed
+- id: Update garage door state on startup
+  alias: Update garage door state on startup
+  trigger:
+  - platform: homeassistant
+    event: start
+  action:
+  - service: mqtt.publish
+    data:
+      topic: garage/door/1/action
+      payload: STATE
 - id: Battery Alert
   alias: Battery Alert
   trigger:
@@ -207,7 +221,7 @@
   - service: climate.set_hvac_mode
     data:
       entity_id: climate.underfloorheating
-      hvac_mode: off
+      hvac_mode: false
 - id: Media Center on at Bedtime
   alias: Media Center on at Bedtime
   trigger:
@@ -252,7 +266,6 @@
         push:
           badge: 0
           category: desktop
-
 - id: Scan for Objects at Frontdoor when motion detected
   alias: Scan for Objects at Frontdoor when motion detected
   trigger:
@@ -263,11 +276,10 @@
   - service: camera.snapshot
     data:
       entity_id: camera.frontdoor
-      filename: "/home/rob/.homeassistant/www/camera_snapshot/frontdoor_latest.jpg"
+      filename: /home/rob/.homeassistant/www/camera_snapshot/frontdoor_latest.jpg
   - service: image_processing.scan
     data:
       entity_id: image_processing.deepstack_object_frontdoor
-
 - id: Scan for Objects in Garage when motion detected
   alias: Scan for Objects in Garage when motion detected
   trigger:
@@ -278,12 +290,11 @@
   - service: camera.snapshot
     data:
       entity_id: camera.GAC
-      filename: "/home/rob/.homeassistant/www/camera_snapshot/gac_latest.jpg"
+      filename: /home/rob/.homeassistant/www/camera_snapshot/gac_latest.jpg
   - service: image_processing.scan
     data:
       entity_id: image_processing.deepstack_object_gac
   - delay: 00:00:01
-
 - id: Scan for Objects at Right Side Camera when motion detected
   alias: Scan for Objects at Right Side Camera when motion detected
   trigger:
@@ -294,12 +305,11 @@
   - service: camera.snapshot
     data:
       entity_id: camera.RSC
-      filename: "/home/rob/.homeassistant/www/camera_snapshot/rsc_latest.jpg"
+      filename: /home/rob/.homeassistant/www/camera_snapshot/rsc_latest.jpg
   - service: image_processing.scan
     data:
       entity_id: image_processing.deepstack_object_rsc
   - delay: 00:00:01
-
 - id: Scan for Objects at Left Side Camera when motion detected
   alias: Scan for Objects at Left Side Camera when motion detected
   trigger:
@@ -310,12 +320,11 @@
   - service: camera.snapshot
     data:
       entity_id: camera.LSC
-      filename: "/home/rob/.homeassistant/www/camera_snapshot/lsc_latest.jpg"
+      filename: /home/rob/.homeassistant/www/camera_snapshot/lsc_latest.jpg
   - service: image_processing.scan
     data:
       entity_id: image_processing.deepstack_object_lsc
   - delay: 00:00:01
-
 - id: Scan for Objects at Backdoor Camera when motion detected
   alias: Scan for Objects at Backdoor Camera when motion detected
   trigger:
@@ -326,12 +335,11 @@
   - service: camera.snapshot
     data:
       entity_id: camera.BDC
-      filename: "/home/rob/.homeassistant/www/camera_snapshot/bdc_latest.jpg"
+      filename: /home/rob/.homeassistant/www/camera_snapshot/bdc_latest.jpg
   - service: image_processing.scan
     data:
       entity_id: image_processing.deepstack_object_bdc
   - delay: 00:00:01
-
 - id: Scan for Objects at Back Garden Camera when motion detected
   alias: Scan for Objects at Back Garden Camera when motion detected
   trigger:
@@ -342,12 +350,11 @@
   - service: camera.snapshot
     data:
       entity_id: camera.BGC
-      filename: "/home/rob/.homeassistant/www/camera_snapshot/bgc_latest.jpg"
+      filename: /home/rob/.homeassistant/www/camera_snapshot/bgc_latest.jpg
   - service: image_processing.scan
     data:
       entity_id: image_processing.deepstack_object_bgc
   - delay: 00:00:01
-
 - id: Scan for Objects at Floodlight when motion detected
   alias: Scan for Objects at Floodlight when motion detected
   trigger:
@@ -358,12 +365,11 @@
   - service: camera.snapshot
     data:
       entity_id: camera.frontfloodlight
-      filename: "/home/rob/.homeassistant/www/camera_snapshot/frontfloodlight_latest.jpg"
+      filename: /home/rob/.homeassistant/www/camera_snapshot/frontfloodlight_latest.jpg
   - service: image_processing.scan
     data:
       entity_id: image_processing.deepstack_object_frontfloodlight
   - delay: 00:00:01
-
 - id: Scan for Car Registrations at Floodlight when motion detected
   alias: Scan for Car Registrations at Floodlight when motion detected
   trigger:
@@ -374,7 +380,6 @@
   - service: image_processing.scan
     data:
       entity_id: image_processing.openalpr_frontfloodlight
-
 - id: Door Bell Pushed Take Snapshot
   alias: Door Bell Pushed Take Snapshot
   trigger:
@@ -385,12 +390,11 @@
   - service: camera.snapshot
     data:
       entity_id: camera.frontdoor
-      filename: "/home/rob/.homeassistant/www/camera_snapshot/frontdoor_ring_{{ now ().year }}{{ now ().month }}{{ now ().day }}-{{ now ().hour }}{{ now ().minute }}.jpg"
+      filename: /mnt/squeeze_media/Fileserver/Rob/deepstacksnapshots/frontdoor_ring_{{now().year}}{{now().month}}{{now().day}}-{{now().hour}}{{now().minute}}.jpg
   - service: camera.snapshot
     data:
       entity_id: camera.frontdoor
-      filename: "/home/rob/.homeassistant/www/camera_snapshot/frontdoor_ring_latest.jpg"
-
+      filename: /home/rob/.homeassistant/www/camera_snapshot/frontdoor_ring_latest.jpg
 - id: Switch on away mode
   alias: Switch on away mode
   trigger:
@@ -572,8 +576,8 @@
   action:
     service: homeassistant.turn_off
     entity_id:
-      - switch.guestwifimain
-      - switch.guestwifiupstairs
+    - switch.guestwifimain
+    - switch.guestwifiupstairs
 - id: Lights off at Bedtime
   alias: Lights off at Bedtime
   trigger:
@@ -590,9 +594,9 @@
       state: 'off'
   action:
     service: switch.turn_off
-    entity_id: 
-      - switch.lounge_lamp_1
-      - switch.lounge_lamp_2
+    entity_id:
+    - switch.lounge_lamp_1
+    - switch.lounge_lamp_2
 - id: AmbiLight off when TV is off
   alias: AmbiLight off when TV is off
   trigger:
@@ -810,11 +814,71 @@
     platform: state
     to: 'on'
   action:
-   service: shell_command.cmd_upgrade_ha
-- id: 'Github ha current version to SVG'
-  alias: 'Run Current HA Version Check every 2 hours'
+    service: shell_command.cmd_upgrade_ha
+- id: Github ha current version to SVG
+  alias: Run Current HA Version Check every 2 hours
   trigger:
     platform: time_pattern
-    minutes: '/120'
+    minutes: /120
   action:
     service: shell_command.cmd_haversion_svg
+- id: '1609413047490'
+  alias: Garage Bench Light on when 3D Printing
+  description: ''
+  trigger:
+  - type: turned_on
+    platform: device
+    device_id: 4319212804f311ebae9e5fcaa04d0cb0
+    entity_id: binary_sensor.octoprint_printing_3
+    domain: binary_sensor
+  condition: []
+  action:
+  - type: turn_on
+    device_id: ff699b5fac6148f48107f1c8d761893b
+    entity_id: switch.garagebenchlight
+    domain: switch
+  mode: single
+- id: '1613324697056'
+  alias: Shut Kitchen Blinds 20 mins after Sunset
+  description: ''
+  trigger:
+  - platform: sun
+    event: sunset
+    offset: +00:20:00
+  condition: []
+  action:
+  - domain: cover
+    entity_id: cover.left_bifold
+    device_id: 8935e4585c60f40ea3b3fc9ec509cc1f
+    type: close
+  - domain: cover
+    entity_id: cover.mid_bifold
+    device_id: 2f4b8d63b7d677c387de988d77fa6d8c
+    type: close
+  - domain: cover
+    entity_id: cover.right_bifold
+    device_id: 76aca443faa4e4ec1a66229564247b6e
+    type: close
+  mode: single
+- id: '1613324697057'
+  alias: Open Kitchen Blinds 20 mins before Sunrise
+  description: ''
+  trigger:
+  - platform: sun
+    event: sunrise
+    offset: -00:20:00
+  condition: []
+  action:
+  - domain: cover
+    entity_id: cover.left_bifold
+    device_id: 8935e4585c60f40ea3b3fc9ec509cc1f
+    type: open
+  - domain: cover
+    entity_id: cover.mid_bifold
+    device_id: 2f4b8d63b7d677c387de988d77fa6d8c
+    type: open
+  - domain: cover
+    entity_id: cover.right_bifold
+    device_id: 76aca443faa4e4ec1a66229564247b6e
+    type: open
+  mode: single

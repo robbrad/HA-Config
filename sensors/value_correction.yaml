@@ -2,10 +2,10 @@
   - platform: template
     sensors:
       robwifi:
-        value_template: '{% if is_state("device_tracker.409c281236c0", "home") %}Online{% else %}Offline{% endif %}'
+        value_template: '{% if is_state("device_tracker.robs_iphone", "home") %}Online{% else %}Offline{% endif %}'
 
       kirstywifi:
-        value_template: '{% if is_state("device_tracker.bc9fef2f1fe3", "home") %}Online{% else %}Offline{% endif %}'
+        value_template: '{% if is_state("device_tracker.kirstys_iphone", "home") %}Online{% else %}Offline{% endif %}'
 
       since_last_boot_templated:
         value_template: >-

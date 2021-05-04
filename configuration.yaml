@@ -11,6 +11,7 @@ homeassistant:
        - 192.168.0.0/23
        - 10.8.0.0/24
        - 172.17.0.0/24
+   - type: homeassistant
   # Customization file
   packages: !include_dir_named packages
   customize: !include customize.yaml
@@ -28,6 +29,8 @@ system_health:
 influxdb:
   host: 192.168.0.30
   port: 8086
+  bucket: influx_bucket
+  token: !secret influxdb_token
 
 utility_meter:
   hourly_energy:
@@ -59,7 +62,7 @@ recorder:
 
 #https://home-assistant.io/components/logger/
 logger:
-  default: debug
+  default: warning
   #logs:
   #  homeassistant.components.sensor.template: critical
   #  homeassistant.components.cover: critical
@@ -175,9 +178,6 @@ media_player:
   - platform: kodi
     host: 192.168.0.43
     name: Kodi Lounge
-  - platform: squeezebox
-    host: 192.168.0.82
-    port: 9000
 ####################################################
 #                                                  #
 #                     Wemo Plugs                   #
@@ -218,18 +218,44 @@ light:
         name: led_strip_lounge
 
 cover:
-  platform: opengarage
-  covers:
-      garage:
-        host:  192.168.1.84
-        device_key: opendoor
-        name:  GarageDoor
+  - platform: mqtt
+    name: "Garage Door"
+    state_topic: "garage/door/1/status"
+    command_topic: "garage/door/1/action"
+    availability_topic: "GarHAge/availability"
+    qos: 0
+    optimistic: false
+    retain: false
+    payload_open: "OPEN"
+    payload_close: "CLOSE"
+    payload_stop: "STATE"
+    state_open: "open"
+    state_closed: "closed"
+    payload_available: "online"
+    payload_not_available: "offline"
+  
+  - platform: group
+    name: Kitchen Blinds
+    entities:
+      - cover.left_bifold
+      - cover.mid_bifold
+      - cover.right_bifold
 
 panel_iframe:
   kodi_remote:
     title: 'Kodi Remote'
     url: 'http://192.168.0.43:8080'
     icon: mdi:kodi
+
+####################################################
+#                                                  #
+#                     Blinds                       #
+#                                                  #
+####################################################
+somfy:
+  client_id: !secret somfy_client_id
+  client_secret: !secret client_secret
+
 
 
 ####################################################
@@ -285,6 +311,12 @@ homekit:
       - climate
 
 stream:
+
+telegram_bot:
+  - platform: polling
+    api_key: !secret telegram_api_key
+    allowed_chat_ids:
+      - !secret telegram_user_id
 ####################################################
 #                                                  #
 #            END OF CONFIGURATION FILE             #
