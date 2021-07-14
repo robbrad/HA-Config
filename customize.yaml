@@ -299,3 +299,5 @@ switch.porchlight:
 switch.christmaslights:
   friendly_name: Christmas Lights
   icon: mdi:pine-tree
+sensor.my_currenttemperaturec: {}
+sensor.mycurrenttemperaturef: {}

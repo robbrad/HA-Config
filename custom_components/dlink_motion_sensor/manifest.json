@@ -1,8 +1,0 @@
-{
-  "domain": "dlink",
-  "name": "dlink PID",
-  "documentation": "https://github.com/postlund/hass-config/tree/master/homeassistant/custom_components/dlink_motion_sensor",
-  "dependencies": [],
-  "codeowners": [],
-  "requirements": ["PySimpleSOAP==1.16.2"]
-}

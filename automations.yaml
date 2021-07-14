@@ -520,11 +520,11 @@
     - condition: sun
       before: sunrise
     - condition: state
-      entity_id: switch.porchlight
+      entity_id: switch.porch_light
       state: 'Off'
   action:
     service: switch.turn_on
-    entity_id: switch.porchlight
+    entity_id: switch.porch_light
 - id: Porch Light on at Sunset
   alias: Porch Light on at Sunset
   trigger:
@@ -532,7 +532,7 @@
     event: sunset
   action:
     service: switch.turn_on
-    entity_id: switch.porchlight
+    entity_id: switch.porch_light
 - id: Porch Light off at 2300
   alias: Porch Light off at 2300
   trigger:
@@ -540,7 +540,7 @@
     at: '23:00:00'
   action:
     service: switch.turn_off
-    entity_id: switch.porchlight
+    entity_id: switch.porch_light
 - id: Turn off Porch light 5 minutes after last movement
   alias: Turn off Porch light 5 minutes after last movement
   trigger:
@@ -563,7 +563,7 @@
       before_offset: 01:00:00
       condition: sun
   action:
-  - entity_id: switch.porchlight
+  - entity_id: switch.porch_light
     service: homeassistant.turn_off
 - id: Turn off GuestWifi If no users for 12 hours
   alias: Turn off GuestWifi If no users for 12 hours
@@ -749,7 +749,7 @@
     to: 'on'
   action:
     service: homeassistant.turn_on
-    entity_id: switch.garagebenchlight
+    entity_id: switch.garage_bench_light
 - id: Turn off Garage light 5 minutes after last movement
   alias: Turn off Garage light 5 minutes after last movement
   trigger:
@@ -761,7 +761,7 @@
       minutes: 5
   action:
     service: homeassistant.turn_off
-    entity_id: switch.garagebenchlight
+    entity_id: switch.garage_bench_light
 - id: Enable MQTT discovery for all devices
   alias: Enable MQTT discovery for all devices
   trigger:
@@ -835,7 +835,7 @@
   action:
   - type: turn_on
     device_id: ff699b5fac6148f48107f1c8d761893b
-    entity_id: switch.garagebenchlight
+    entity_id: switch.garage_bench_light
     domain: switch
   mode: single
 - id: '1613324697056'

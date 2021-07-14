@@ -31,8 +31,10 @@ influxdb:
   port: 8086
   api_version: 2
   bucket: home-assistant
-  organization: willow-lane
+  organization: !secret influxdb_org
   token: !secret influxdb_token
+  ssl: false
+  verify_ssl: false
 
 utility_meter:
   hourly_energy:

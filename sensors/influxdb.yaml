@@ -1,73 +1,120 @@
 
   - platform: influxdb
-    host: localhost
-    queries:
-      - name: myCurrentWindspeed
-        value_template: '{{ value | round(1) }}'
-        group_function: last
-        where: time > now() - 1h
-        measurement: '"Acurite-5n1"'
-        field: wind_avg_km_h
-        database: rtl433
-        unit_of_measurement: 'Mph'
+    api_version: 2
+    host: 192.168.0.30
+    port: 8086
+    ssl: false
+    verify_ssl: false
+    organization: !secret influxdb_org
+    token: !secret influxdb_token
+    bucket: rtl433
+    queries_flux:
+      - group_function: last
+        imports:
+          - strings
+        name: myCurrentWindspeed
+        query: >
+          filter(fn: (r) => r["_measurement"] == "Acurite-5n1") |> filter(fn: (r) => r["_field"] == "wind_avg_km_h")
+        range_start: "-1h"
+        unit_of_measurement: 'kmh'
 
   - platform: influxdb
-    host: localhost
-    queries:
-      - name: myCurrentTemperatureF
-        value_template: '{{ value | round(1) }}'
-        group_function: last
-        where: time > now() - 1h
-        measurement: '"Acurite-5n1"'
-        field: temperature_F
-        database: rtl433
+    api_version: 2
+    host: 192.168.0.30
+    port: 8086
+    ssl: false
+    verify_ssl: false
+    organization: !secret influxdb_org
+    token: !secret influxdb_token
+    bucket: rtl433
+    queries_flux:
+      - group_function: last
+        imports:
+          - strings
+        name: myCurrentTemperatureF
+        query: >
+          filter(fn: (r) => r["_measurement"] == "Acurite-5n1") |> filter(fn: (r) => r["_field"] == "temperature_F")
+        range_start: "-1h"
         unit_of_measurement: '°F'
+        value_template: '{{ value | round(1) }}'
 
   - platform: influxdb
-    host: localhost
-    queries:
-      - name: weatherstation_battery_level
+    api_version: 2
+    host: 192.168.0.30
+    port: 8086
+    ssl: false
+    verify_ssl: false
+    organization: !secret influxdb_org
+    token: !secret influxdb_token
+    bucket: rtl433
+    queries_flux:
+      - group_function: last
+        imports:
+          - strings
+        name: weatherstation_battery_level
+        query: >
+          filter(fn: (r) => r["_measurement"] == "Acurite-5n1") |> filter(fn: (r) => r["_field"] == "battery")
+        range_start: "-1h"
         value_template: '{{ value }}'
-        group_function: last
-        where: time > now() - 1h
-        measurement: '"Acurite-5n1"'
-        field: battery
-        database: rtl433
 
   - platform: influxdb
-    host: localhost
-    queries:
-      - name: uvstation_battery_level
+    api_version: 2
+    host: 192.168.0.30
+    port: 8086
+    ssl: false
+    verify_ssl: false
+    organization: !secret influxdb_org
+    token: !secret influxdb_token
+    bucket: rtl433
+    queries_flux:
+      - group_function: last
+        imports:
+          - strings
+        name: uvstation_battery_level
+        query: >
+          filter(fn: (r) => r["_measurement"] == "Oregon-UVR128") |> filter(fn: (r) => r["_field"] == "battery")
+        range_start: "-1h"
         value_template: '{{ value }}'
-        group_function: last
-        where: time > now() - 1h
-        measurement: '"Oregon-UVR128"'
-        field: battery
-        database: rtl433
 
   - platform: influxdb
-    host: localhost
-    queries:
-      - name: uv_index
+    api_version: 2
+    host: 192.168.0.30
+    port: 8086
+    ssl: false
+    verify_ssl: false
+    organization: !secret influxdb_org
+    token: !secret influxdb_token
+    bucket: rtl433
+    queries_flux:
+      - group_function: last
+        imports:
+          - strings
+        name: uv_index
+        query: >
+          filter(fn: (r) => r["_measurement"] == "Oregon-UVR128") |> filter(fn: (r) => r["_field"] == "uv")
+        range_start: "-1h"
         value_template: '{{ value }}'
-        group_function: last
-        where: time > now() - 1h
-        measurement: '"Oregon-UVR128"'
-        field: uv
-        database: rtl433
         unit_of_measurement: 'UV Index'
 
   - platform: influxdb
-    host: localhost
-    queries:
-      - name: mycurrenthumidity
-        value_template: '{{ value | round(1) }}'
-        group_function: last
-        where: time > now() - 1h
-        measurement: '"Acurite-5n1"'
-        field: humidity
-        database: rtl433
+    api_version: 2
+    host: 192.168.0.30
+    port: 8086
+    ssl: false
+    verify_ssl: false
+    organization: !secret influxdb_org
+    token: !secret influxdb_token
+    bucket: rtl433
+    queries_flux:
+      - group_function: last
+        imports:
+          - strings
+        name: mycurrenthumidity
+        query: >
+          filter(fn: (r) => r["_measurement"] == "Acurite-5n1") |> filter(fn: (r) => r["_field"] == "humidity")
+        range_start: "-1h"
         unit_of_measurement: 'bar'
+        value_template: '{{ value | round(1) }}'
 
   - platform: template
     sensors:
