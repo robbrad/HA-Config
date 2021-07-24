@@ -1,7 +1,9 @@
 import broadlink
 import logging
+import time
 from datetime import datetime
 from socket import timeout
+
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -25,17 +27,26 @@ CONF_SCHEDULE = 'schedule'
 DEFAULT_SCHEDULE = 0
 DEFAULT_USE_EXTERNAL_TEMP = True
 
+
 class BroadlinkThermostat:
 
-    def __init__(self, host, mac):
+    def __init__(self, host):
         self._host = host
-        self._port = 80
-        self._mac = bytes.fromhex(''.join(reversed(mac.split(':'))))
-
+        
     def device(self):
-        return broadlink.gendevice(0x4EAD, (self._host, self._port), self._mac)
+        max_attempt = 3
+        for attempt in range(0, max_attempt):
+            if attempt > 0:
+                time.sleep(0.1)
+            try:
+                attempt += 1
+                broadlink.timeout = 1
+                return broadlink.hello(self._host, timeout=3)
+            except broadlink.exceptions.NetworkTimeoutError:
+                if attempt == max_attempt:                                    
+                    raise
 
-    def thermostat_set_time(self):
+    def set_time(self):
         """Set thermostat time"""
         try:
             device = self.device()
@@ -44,21 +55,17 @@ class BroadlinkThermostat:
                 device.set_time(now.hour,
                                 now.minute,
                                 now.second,
-                                now.weekday() + 1)
-        except timeout:
-            pass
+                                now.weekday() + 1)        
         except Exception as e:
             _LOGGER.error("Thermostat %s set_time error: %s", self._host, str(e))
 
-    def thermostat_read_status(self):
+    def read_status(self):
         """Read thermostat data"""
         data = None
         try:
             device = self.device()
             if device.auth():
                 data = device.get_full_status()
-        except timeout:
-            pass
         except Exception as e:
             _LOGGER.warning("Thermostat %s read_status error: %s", self._host, str(e))
         finally:

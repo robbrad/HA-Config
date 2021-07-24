@@ -321,6 +321,16 @@ telegram_bot:
     api_key: !secret telegram_api_key
     allowed_chat_ids:
       - !secret telegram_user_id
+
+birthdays:
+  - name: Rob
+    date_of_birth: !secret rob_birthday
+  - name: Kirsty
+    date_of_birth: !secret kirsty_birthday
+  - name: Iona
+    date_of_birth: !secret iona_birthday
+  - name: Ethan
+    date_of_birth: !secret ethan_birthday
 ####################################################
 #                                                  #
 #            END OF CONFIGURATION FILE             #

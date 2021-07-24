@@ -12,8 +12,8 @@
     save_timestamped_file: True
     show_boxes: True
     targets:
-      - person
-      - car
+      - target: person
+      - target: car
     source:
       - entity_id: camera.frontfloodlight
 
@@ -24,8 +24,8 @@
     save_timestamped_file: True
     show_boxes: True
     targets:
-      - person
-      - car
+      - target: person
+      - target: car
     source:
       - entity_id: camera.frontdoor
 
@@ -36,7 +36,7 @@
     save_timestamped_file: True
     show_boxes: True
     targets:
-      - person
+      - target: person
     source:
       - entity_id: camera.GAC
 
@@ -47,7 +47,7 @@
     save_timestamped_file: True
     show_boxes: True
     targets:
-      - person
+      - target: person
     source:
       - entity_id: camera.BDC
 
@@ -58,7 +58,7 @@
     save_timestamped_file: True
     show_boxes: True
     targets:
-      - person
+      - target: person
     source:
       - entity_id: camera.LSC
 
@@ -69,7 +69,7 @@
     save_timestamped_file: True
     show_boxes: True
     targets:
-      - person
+      - target: person
     source:
       - entity_id: camera.BGC
   
@@ -80,15 +80,6 @@
     save_timestamped_file: True
     show_boxes: True
     targets:
-      - person
+      - target: person
     source:
       - entity_id: camera.RSC
-
-  - platform: amazon_rekognition
-    aws_access_key_id: !secret aws_access_key
-    aws_secret_access_key: !secret aws_secret_key
-    region_name: eu-west-1
-    target: Car
-    scan_interval: 604800
-    source:
-      - entity_id: camera.frontfloodlight
