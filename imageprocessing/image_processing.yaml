@@ -85,9 +85,9 @@
   source:
     - entity_id: camera.RSC
 
-#- platform: classificationbox
-#  ip_address: localhost
-#  port: 8099
-#  confidence: 50
-#  source:
-#    - entity_id: camera.LSC
+- platform: classificationbox
+  ip_address: localhost
+  port: 8099
+  confidence: 50
+  source:
+    - entity_id: camera.LSC

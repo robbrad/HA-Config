@@ -53,9 +53,9 @@ jobs:
           mv -v HASS-Deepstack-object/custom_components/* ./custom_components/
       - name: Clone custom component classificationbox
         run: |
-          git clone https://github.com/robmarkcole/\
-          HASS-Machinebox-Classificationbox.git classificationbox_git
-          mv -v classificationbox_git/custom_components/* ./custom_components/
+          git clone 'https://github.com/robmarkcole/\
+            HASS-Machinebox-Classificationbox.git' cb
+          mv -v cb/custom_components/* ./custom_components/
       - name: Clone custom component dlink_hnap
         run: |
           git clone https://github.com/postlund/dlink_hnap.git
