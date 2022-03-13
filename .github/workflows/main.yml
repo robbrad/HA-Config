@@ -77,7 +77,8 @@ jobs:
           mv -v eufy/custom_components/* ./custom_components/
       - name: Clone custom component classificationbox
         run: |
-          git clone https://github.com/robmarkcole/HASS-Machinebox-Classificationbox.git classificationbox_git
+          git clone https://github.com/robmarkcole/\
+          HASS-Machinebox-Classificationbox.git classificationbox_git
           mv -v classificationbox_git/custom_components/* ./custom_components/
       - name: Run Home Assistant Configuration Check
         uses: frenck/action-home-assistant@v1.1.1
