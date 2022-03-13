@@ -54,7 +54,7 @@ jobs:
       - name: Clone custom component classificationbox
         run: |-
           git clone "https://github.com/robmarkcole/\
-            HASS-Machinebox-Classificationbox.git" cb
+            HASS-Machinebox-Classificationbox.git" cb\n
           mv -v cb/custom_components/* ./custom_components/
       - name: Clone custom component dlink_hnap
         run: |
