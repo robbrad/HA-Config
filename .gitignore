@@ -14,16 +14,16 @@
 !alerts
 !binary_sensors
 !imageprocessing
-!custom_components
-!custom_components/dlink_motion_sensor
-!custom_components/dlink_motion_sensor/manifest.json
-!custom_components/floureon
-!custom_components/floureon/manifest.json
-!custom_components/amazon_rekognition
-!custom_components/amazon_rekognition/manifest.json
-!custom_components/eufy_vacuum
+!custom_components/*
+!custom_components/dlink_hnap/*
+!custom_components/eufy_vacuum/*
+!custom_components/classificationbox/*
+!custom_components/floureon/*
+!custom_components/deepstack_object/*
+!custom_components/birthdays/*
+!custom_components/hildebrandglow/*
+!custom_components/weatherbit/*
 
-!custom_components/amazon_rekognition/manifest.json
 !notification
 !packages
 !panels
