@@ -81,7 +81,7 @@ jobs:
           mv -v eufy/custom_components/* ./custom_components/
       - name: "List Custom Componenets"
         run: |
-          ls ./custom_components/
+          ls ./custom_components/classificationbox
       - name: Run Home Assistant Configuration Check
         uses: frenck/action-home-assistant@v1.3
         with:
