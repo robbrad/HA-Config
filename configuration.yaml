@@ -14,8 +14,6 @@ homeassistant:
         - 172.17.0.0/24
     - type: homeassistant
   # Customization file
-  media_dirs:
-    deepstack_snapshots: /mnt/squeeze_media/Fileserver/Rob/deepstacksnapshots/
   packages: !include_dir_named packages
   customize: !include customize.yaml
   allowlist_external_dirs:

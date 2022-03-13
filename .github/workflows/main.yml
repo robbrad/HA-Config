@@ -51,6 +51,11 @@ jobs:
         run: |
           git clone https://github.com/robmarkcole/HASS-Deepstack-object.git
           mv -v HASS-Deepstack-object/custom_components/* ./custom_components/
+      - name: Clone custom component classificationbox
+        run: |
+          git clone https://github.com/robmarkcole/\
+          HASS-Machinebox-Classificationbox.git classificationbox_git
+          mv -v classificationbox_git/custom_components/* ./custom_components/
       - name: Clone custom component dlink_hnap
         run: |
           git clone https://github.com/postlund/dlink_hnap.git
@@ -75,11 +80,9 @@ jobs:
         run: |
           git clone https://github.com/pbulteel/eufy_vacuum.git eufy
           mv -v eufy/custom_components/* ./custom_components/
-      - name: Clone custom component classificationbox
+      - name: "List Custom Componenets"
         run: |
-          git clone https://github.com/robmarkcole/\
-          HASS-Machinebox-Classificationbox.git classificationbox_git
-          mv -v classificationbox_git/custom_components/* ./custom_components/
+          ls ./custom_components/
       - name: Run Home Assistant Configuration Check
         uses: frenck/action-home-assistant@v1.1.1
         with:
