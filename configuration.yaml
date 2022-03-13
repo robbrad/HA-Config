@@ -1,0 +1,331 @@
+---
+####################################################
+#                                                  #
+#                 HOME ASSISTANT                   #
+#                                                  #
+####################################################
+# https://home-assistant.io/docs/configuration/basic/
+homeassistant:
+  auth_providers:
+    - type: trusted_networks
+      trusted_networks:
+        - 192.168.0.0/23
+        - 10.8.0.0/24
+        - 172.17.0.0/24
+    - type: homeassistant
+  # Customization file
+  media_dirs:
+    deepstack_snapshots: /mnt/squeeze_media/Fileserver/Rob/deepstacksnapshots/
+  packages: !include_dir_named packages
+  customize: !include customize.yaml
+  allowlist_external_dirs:
+    - !secret dirwhitelist1
+    - !secret dirwhitelist2
+    - !secret dirwhitelist3
+    - !secret dirwhitelist4
+  external_url: http://192.168.0.30:8123/
+  internal_url: http://192.168.0.30:8123/
+
+system_health:
+
+# Influx DB
+influxdb:
+  host: 192.168.0.30
+  port: 8086
+  api_version: 2
+  bucket: home-assistant
+  organization: !secret influxdb_org
+  token: !secret influxdb_token
+  ssl: false
+  verify_ssl: false
+
+utility_meter:
+  hourly_energy:
+    source: sensor.emoncms6_overallkwh
+    cycle: hourly
+  daily_energy:
+    source: sensor.emoncms6_overallkwh
+    cycle: daily
+  weekly_energy:
+    source: sensor.emoncms6_overallkwh
+    cycle: weekly
+  monthly_energy:
+    source: sensor.emoncms6_overallkwh
+    cycle: monthly
+  yearly_energy:
+    source: sensor.emoncms6_overallkwh
+    cycle: yearly
+
+# https://home-assistant.io/components/history/
+history:
+
+# https://home-assistant.io/components/config/
+config:
+
+# https://home-assistant.io/components/recorder/
+recorder:
+  purge_keep_days: 2
+
+# https://home-assistant.io/components/logger/
+logger:
+  default: warning
+  # logs:
+  #  homeassistant.components.sensor.template: critical
+  #  homeassistant.components.cover: critical
+ios:
+# iOS App SupporT
+
+mobile_app:
+
+http:
+
+sun:
+
+# Checks for available updates
+# Note: This component will send some information about your system to
+# the developers to assist with development of Home Assistant.
+# For more information, please see:
+# https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
+updater:
+# Optional, allows Home Assistant developers to focus on popular components.
+# include_used_components: true
+
+# Discover some devices automatically
+discovery:
+
+# Allows you to issue voice commands from the frontend in enabled browsers
+conversation:
+
+# View all events in a logbook
+logbook:
+
+# Enables a map showing the location of tracked devices
+map:
+
+# Text to speech
+tts:
+  - platform: google_translate
+    service_name: google_say
+
+# Cloud
+cloud:
+
+zeroconf:
+
+ssdp:
+
+####################################################
+#                                                  #
+#      LINKS TO INDIVUAL CONFIGURATION FILES       #
+#                                                  #
+####################################################
+
+# https://home-assistant.io/docs/configuration/splitting_configuration/
+group: !include groups.yaml
+device_tracker: !include device_tracker.yaml
+notify: !include_dir_merge_list notification/
+switch: !include_dir_merge_list switches/
+sensor: !include_dir_merge_list sensors/
+automation: !include automations.yaml
+script: !include scripts.yaml
+shell_command: !include shell_commands.yaml
+binary_sensor: !include_dir_merge_list binary_sensors/
+input_select: !include input_select.yaml
+frontend: !include frontend.yaml
+alert: !include_dir_merge_list alerts/
+input_boolean: !include input_boolean.yaml
+camera: !include camera.yaml
+
+python_script: !include_dir_merge_named python_scripts/
+####################################################
+#                                                  #
+#                OPEN WEATHER MAP                  #
+#                                                  #
+####################################################
+
+# https://home-assistant.io/components/weather.openweathermap/
+weather:
+  - platform: darksky
+    api_key: !secret darkskyapi
+####################################################
+#                                                  #
+#                      NEST                        #
+#                                                  #
+####################################################
+
+# https://home-assistant.io/components/nest/
+nest:
+  client_id: !secret nest_client_id
+  client_secret: !secret nest_client_secret
+
+####################################################
+#                                                  #
+#                     MQTT                         #
+#                                                  #
+####################################################
+
+# https://home-assistant.io/docs/mqtt/broker/#run-your-own
+mqtt:
+  broker: 192.168.0.30
+  port: 1883
+  username: !secret mqtt_user
+  password: !secret mqtt_pass
+  discovery: true
+####################################################
+#                                                  #
+#                     Media Players                #
+#                                                  #
+####################################################
+media_source:
+
+media_player:
+  - platform: lg_netcast
+    host: 192.168.0.72
+    access_token: !secret lgpairkey
+    name: LG Smart TV
+  - platform: kodi
+    host: 192.168.0.43
+    name: Kodi Lounge
+####################################################
+#                                                  #
+#                     Wemo Plugs                   #
+#                                                  #
+####################################################
+wemo:
+  static:
+    - 192.168.1.16
+    - 192.168.1.17
+    - 192.168.1.18
+
+####################################################
+#                                                  #
+#                     Limitless LED                #
+#                                                  #
+####################################################
+light:
+  - platform: limitlessled
+    bridges:
+      - host: 192.168.1.85
+        groups:
+          - number: 1
+            type: rgbw
+            name: LoungeLight2
+          - number: 2
+            type: rgbw
+            name: LoungeLight3
+          - number: 3
+            type: rgbw
+            name: LoungeLight4
+          - number: 4
+            type: rgbw
+            name: LoungeLight5
+
+  - platform: flux_led
+    devices:
+      192.168.0.86:
+        name: led_strip_lounge
+
+cover:
+  - platform: mqtt
+    name: "Garage Door"
+    state_topic: "garage/door/1/status"
+    command_topic: "garage/door/1/action"
+    availability_topic: "GarHAge/availability"
+    qos: 0
+    optimistic: false
+    retain: false
+    payload_open: "OPEN"
+    payload_close: "CLOSE"
+    payload_stop: "STATE"
+    state_open: "open"
+    state_closed: "closed"
+    payload_available: "online"
+    payload_not_available: "offline"
+
+  - platform: group
+    name: Kitchen Blinds
+    entities:
+      - cover.left_bifold
+      - cover.mid_bifold
+      - cover.right_bifold
+
+panel_iframe:
+  kodi_remote:
+    title: "Kodi Remote"
+    url: "http://192.168.0.43:8080"
+    icon: mdi:kodi
+
+####################################################
+#
+#                     Blinds                       #
+#                                                  #
+####################################################
+somfy:
+  client_id: !secret somfy_client_id
+  client_secret: !secret somfy_client_secret
+
+####################################################
+#                                                  #
+#            Image Processing                      #
+#                                                  #
+####################################################
+image_processing: !include_dir_merge_list imageprocessing/
+
+# speedtestdotnet:
+#   scan_interval:
+#     hours: 3
+#   monitored_conditions:
+#     - ping
+#     - download
+#     - upload
+
+person:
+
+eufy_vacuum:
+  devices:
+    - name: Buttons
+      address: 192.168.1.81
+      access_token: !secret EufyRoboVacKey
+      id: !secret EufyRoboVacID
+      type: T2118
+
+climate:
+  - platform: floureon
+    name: UnderfloorHeating
+    mac: "78:0f:77:d4:40:eb"
+    host: 192.168.1.82
+
+homekit:
+  ip_address: 192.168.0.30
+  filter:
+    include_domains:
+      - switch
+      - light
+      - media_player
+      - sensor
+      - cover
+      - climate
+
+stream:
+
+telegram_bot:
+  - platform: polling
+    api_key: !secret telegram_api_key
+    allowed_chat_ids:
+      - !secret telegram_user_id
+
+birthdays:
+  - name: Rob
+    date_of_birth: !secret rob_birthday
+  - name: Kirsty
+    date_of_birth: !secret kirsty_birthday
+  - name: Iona
+    date_of_birth: !secret iona_birthday
+  - name: Ethan
+    date_of_birth: !secret ethan_birthday
+
+####################################################
+#                                                  #
+#            END OF CONFIGURATION FILE             #
+#                                                  #
+####################################################

@@ -1,0 +1,24 @@
+---
+# https://home-assistant.io/components/shell_command/
+
+####################################################
+#                                                  #
+#              SHUTDOWN COMPUTERS                  #
+#                                                  #
+####################################################
+
+htpc: !secret htpc
+desktop: !secret desktop
+laptop: !secret laptop
+
+####################################################
+#                                                  #
+#              SKY Q                               #
+#                                                  #
+####################################################
+
+cmd_skyq_lr_channel: /home/rob/scripts/skyq.py channel {{chname}}
+cmd_skyq_chno: /home/rob/scripts/skyq.py chno {{chno}}
+cmd_skyq_lr_command: /home/rob/scripts/skyq.py {{command}}
+cmd_upgrade_ha: nohup /home/rob/scripts/autoupgradeHomeAssistant &
+cmd_haversion_svg: /home/rob/scripts/haversion_svg.sh

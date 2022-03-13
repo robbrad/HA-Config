@@ -1,0 +1,34 @@
+---
+# ambitv
+- platform: command_line
+  switches:
+   lgtv:
+    command_on: '/home/rob/scripts/wake_lgtv'
+    command_off: '/home/rob/lgcommander/lgcommander.py -k 990887 -c 1'
+    command_state: '/home/rob/scripts/state_lgtv'
+    value_template: '{{ value == "on" }}'
+    friendly_name: LG TV
+   restartinternet:
+    command_on: '/home/rob/scripts/restart_inet_connection.sh'
+    command_off: ''
+    command_state: '/home/rob/scripts/test_internet'
+    value_template: '{{ value == "on" }}'
+    friendly_name: Internet Connection
+   restartrouters:
+    command_on: '/home/rob/scripts/reboot_wifi_network.sh'
+    command_off: ''
+    command_state: ''
+    value_template: '{{ value == "on" }}'
+    friendly_name: Restart Routers
+   resetguestwifipassword:
+    command_on: '/home/rob/scripts/wifi/setGuestPassword'
+    command_off: ''
+    command_state: ''
+    value_template: '{{ value == "on" }}'
+    friendly_name: Reset Guest Wifi Password
+   mediapad_screen:
+    command_on: !secret mediapad_screen_on
+    command_off: !secret mediapad_screen_off
+    command_state: !secret mediapad_screen_state
+    value_template: '{{ value == "on" }}'
+    friendly_name: Mediapad Screen

@@ -1,0 +1,174 @@
+---
+- platform: influxdb
+  api_version: 2
+  host: 192.168.0.30
+  port: 8086
+  ssl: false
+  verify_ssl: false
+  organization: !secret influxdb_org
+  token: !secret influxdb_token
+  bucket: rtl433
+  queries_flux:
+    - group_function: last
+      imports:
+        - strings
+      name: myCurrentWindspeed
+      query: >
+        filter(fn: (r) => r["_measurement"] == "Acurite-5n1") |>
+        filter(fn: (r) => r["_field"] == "wind_avg_km_h")
+      range_start: "-1h"
+      unit_of_measurement: 'kmh'
+- platform: influxdb
+  api_version: 2
+  host: 192.168.0.30
+  port: 8086
+  ssl: false
+  verify_ssl: false
+  organization: !secret influxdb_org
+  token: !secret influxdb_token
+  bucket: rtl433
+  queries_flux:
+    - group_function: last
+      imports:
+        - strings
+      name: myCurrentTemperatureF
+      query: >
+        filter(fn: (r) => r["_measurement"] == "Acurite-5n1") |>
+        filter(fn: (r) => r["_field"] == "temperature_F")
+      range_start: "-1h"
+      unit_of_measurement: '°F'
+      value_template: '{{ value | round(1) }}'
+- platform: influxdb
+  api_version: 2
+  host: 192.168.0.30
+  port: 8086
+  ssl: false
+  verify_ssl: false
+  organization: !secret influxdb_org
+  token: !secret influxdb_token
+  bucket: rtl433
+  queries_flux:
+    - group_function: last
+      imports:
+        - strings
+      name: weatherstation_battery_level
+      query: >
+        filter(fn: (r) => r["_measurement"] == "Acurite-5n1") |>
+        filter(fn: (r) => r["_field"] == "battery")
+      range_start: "-1h"
+      value_template: '{{ value }}'
+- platform: influxdb
+  api_version: 2
+  host: 192.168.0.30
+  port: 8086
+  ssl: false
+  verify_ssl: false
+  organization: !secret influxdb_org
+  token: !secret influxdb_token
+  bucket: rtl433
+  queries_flux:
+    - group_function: last
+      imports:
+        - strings
+      name: uvstation_battery_level
+      query: >
+        filter(fn: (r) => r["_measurement"] == "Oregon-UVR128") |>
+        filter(fn: (r) => r["_field"] == "battery")
+      range_start: "-1h"
+      value_template: '{{ value }}'
+- platform: influxdb
+  api_version: 2
+  host: 192.168.0.30
+  port: 8086
+  ssl: false
+  verify_ssl: false
+  organization: !secret influxdb_org
+  token: !secret influxdb_token
+  bucket: rtl433
+  queries_flux:
+    - group_function: last
+      imports:
+        - strings
+      name: uv_index
+      query: >
+        filter(fn: (r) => r["_measurement"] == "Oregon-UVR128") |>
+        filter(fn: (r) => r["_field"] == "uv")
+      range_start: "-1h"
+      value_template: '{{ value }}'
+      unit_of_measurement: 'UV Index'
+- platform: influxdb
+  api_version: 2
+  host: 192.168.0.30
+  port: 8086
+  ssl: false
+  verify_ssl: false
+  organization: !secret influxdb_org
+  token: !secret influxdb_token
+  bucket: rtl433
+  queries_flux:
+    - group_function: last
+      imports:
+        - strings
+      name: mycurrenthumidity
+      query: >
+        filter(fn: (r) => r["_measurement"] == "Acurite-5n1") |>
+        filter(fn: (r) => r["_field"] == "humidity")
+      range_start: "-1h"
+      unit_of_measurement: 'bar'
+      value_template: '{{ value | round(1) }}'
+- platform: template
+  sensors:
+    my_currenttemperaturec:
+      value_template: '{{ (((states("sensor.myCurrentTemperatureF")|
+      float) - 32)*5/9) | round(2) }}'
+      friendly_name: "Current Temperature in C"
+      unit_of_measurement: '°C'
+- platform: template
+  sensors:
+    my_windchill:
+      value_template: >
+        "{{ (1.41 - 1.162*float(states.sensor.mycurrentwindspeed.state) +
+        0.98*float(states.sensor.mycurrenttemperaturef.state) +
+        0.124*float(states.sensor.mycurrentwindspeed.state)**2 +
+        0.0185*float(states.sensor.mycurrentwindspeed.state)*
+        float(states.sensor.mycurrenttemperaturef.state)) | round(2) }}"
+      unit_of_measurement: "°C"
+      friendly_name: CurrentWindChill
+- platform: template
+  sensors:
+    my_outdoor_heat_index:
+      friendly_name: 'Outdoor Feels Like'
+      value_template: >-
+          {% set T =((states.sensor.mycurrenttemperaturef.state|
+          float)*1.8)+32%}
+          {% set RH = states.sensor.mycurrenthumidity.state|float %}
+          {% set STEADMAN_HI = 0.5
+          * (T + 61.0 + ((T-68.0)*1.2) + (RH*0.094)) %}
+          {% if STEADMAN_HI >= 80 %}
+            {% set ROTHFUSZ_HI = -42.379 + 2.04901523*T + 10.14333127*RH
+            - 0.22475541*T*RH - 0.00683783*T*T
+            - 0.05481717*RH*RH + 0.00122874*T*T*RH
+            + 0.00085282*T*RH*RH - 0.00000199*T*T*RH*RH %}
+            {% set HI = ROTHFUSZ_HI %}
+            {% if RH < 13 and 80 < T < 112 %}
+              {% set ADJUSTMENT = ((13-RH)/4)*((17-(T-95)|abs)/17)**0.5 %}
+              {% set HI = HI - ADJUSTMENT %}
+            {% elif RH > 85 and 80 < T < 87 %}
+              {% set ADJUSTMENT = ((RH-85)/10) * ((87-T)/5) %}
+              {% set HI = HI + ADJUSTMENT %}
+            {% endif %}
+            {% else %}
+             {% set HI = STEADMAN_HI %}
+            {% endif %}
+            {% set HI_C = (HI-32)/1.8 %}
+            {{- HI_C|round(1) -}}
+      unit_of_measurement: '°C'
+- platform: template
+  sensors:
+    my_dew_point:
+      friendly_name: "Current Dew Point"
+      value_template: >
+        "{{ ((states.sensor.mycurrenttemperaturef.state |
+        float - ((100 - states.sensor.mycurrenthumidity.state |
+        float) /5)))|round(2)}}"
+      unit_of_measurement: '°C'

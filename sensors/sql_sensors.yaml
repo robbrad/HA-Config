@@ -1,0 +1,8 @@
+---
+- platform: sql
+  db_url: !secret sql_db_credentials
+  queries:
+    - name: Air Data Received in 2hrs
+      query: 'SELECT count(1) "DataPointsInLast2Hours" \
+        FROM `air_data` WHERE timestamp > (NOW() - INTERVAL 2 hour);'
+      column: 'DataPointsInLast2Hours'

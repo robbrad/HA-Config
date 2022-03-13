@@ -1,0 +1,310 @@
+---
+switch.ambitvmode1:
+  icon: mdi:television-classic
+switch.ambitvmode2:
+  icon: mdi:television-classic
+switch.ambitvmode3:
+  icon: mdi:television-classic
+switch.desktop_switch:
+  friendly_name: Desktop Switch
+  icon: mdi:desktop-tower
+  emulated_hue_hidden: true
+switch.mainrouter2g:
+  friendly_name: Main Router 2G
+  icon: mdi:wifi
+switch.loungrouter2g:
+  friendly_name: Lounge Router 2G
+  icon: mdi:wifi
+switch.upstairsrouter2g:
+  friendly_name: Upstairs Router 2G
+  icon: mdi:wifi
+switch.gardenrouter2g:
+  friendly_name: Garden Router 2G
+  icon: mdi:wifi
+switch.mainrouter5g:
+  friendly_name: Main Router 5G
+  icon: mdi:wifi
+switch.loungrouter5g:
+  friendly_name: Lounge Router 5G
+  icon: mdi:wifi
+switch.upstairsrouter5g:
+  friendly_name: Upstairs Router 5G
+  icon: mdi:wifi
+switch.gardenrouter5g:
+  friendly_name: Garden Router 5G
+  icon: mdi:wifi
+switch.guestwifi:
+  friendly_name: GuestWifi
+  icon: mdi:wifi
+switch.htpc_switch:
+  friendly_name: HTPC Switch
+  icon: mdi:youtube-tv
+switch.input_hdmi:
+  friendly_name: Input HDMI
+  icon: mdi:video-input-hdmi
+switch.input_tv:
+  friendly_name: Tv Input
+  icon: mdi:television
+switch.laptop_switch:
+  friendly_name: Laptop Switch
+  icon: mdi:laptop
+switch.tv:
+  friendly_name: TV
+  icon: mdi:television
+switch.sky_q_living_room:
+  friendly_name: SKY Q Box
+  icon: mdi:set-top-box
+switch.BedroomLamp:
+  friendly_name: Ethan's Bedroom Lamp
+  icon: mdi:lightbulb-on-outline
+switch.KitchenLighting:
+  friendly_name: Kitchen Cabinet Lighting
+  icon: mdi:lightbulb-on-outline
+switch.decklighting:
+  friendly_name: Deck Lighting
+  icon: mdi:lightbulb-on-outline
+switch.showerpump:
+  friendly_name: Shower Pump
+  icon: mdi:water-pump
+switch.hotwater:
+  friendly_name: Boost Hot Water
+  icon: mdi:water
+switch.Christmas_lights:
+  friendly_name: Christmas Lights
+  icon: mdi:pine-tree
+switch.electric_blanket:
+  friendly_name: Electric Blanket
+  icon: mdi:radiator
+climate.matsterensuiteunderfloorheating:
+  friendly_name: Ensuite Underfloor Heating
+  icon: mdi:radiator
+input_boolean.vacation:
+  friendly_name: Vacation Mode
+  icon: mdi:beach
+input_boolean.football:
+  friendly_name: Football Night
+  icon: mdi:soccer
+sensor.BinCollectionType:
+  friendly_name: Bin Collection Type
+  icon: mdi:delete
+  templates:
+    icon_color: 'if (state === ''Empty Standard General Waste'')
+    return ''rgb(0,0,0)'';
+      if (state === ''Empty Standard Mixed Recycling'')
+      return ''rgb(128,128,128)'';
+      if (state === ''Empty Standard Garden Waste'')
+      return ''rgb(139,69,19)''; return
+      ''rgb(68,115,158)'';
+
+      '
+    hidden: if (state === '') return true;
+sensor.BinCollectionType2:
+  friendly_name: Second Bin Collection Type
+  icon: mdi:delete
+  templates:
+    icon_color: 'if (state === ''Empty Standard General Waste'')
+    return ''rgb(0,0,0)'';
+      if (state === ''Empty Standard Mixed Recycling'')
+      return ''rgb(128,128,128)'';
+      if (state === ''Empty Standard Garden Waste'')
+      return ''rgb(139,69,19)''; return
+      ''rgb(68,115,158)'';
+
+      '
+    hidden: if (state === '') return true;
+sensor.magenta_ink_level:
+  friendly_name: Magenta Ink Level
+  icon: mdi:cup-water
+  templates:
+    icon_color: 'return ''rgb(255,0,255)'';
+
+      '
+sensor.black_ink_level:
+  friendly_name: Black Ink Level
+  icon: mdi:cup-water
+  templates:
+    icon_color: 'return ''rgb(0,0,0)'';
+
+      '
+sensor.yellow_ink_level:
+  friendly_name: Yellow Ink Level
+  icon: mdi:cup-water
+  templates:
+    icon_color: 'return ''rgb(255,255,0)'';
+
+      '
+sensor.cyan_ink_level:
+  friendly_name: Cyan Ink Level
+  icon: mdi:cup-water
+  templates:
+    icon_color: 'return ''rgb(0,255,255)'';
+
+      '
+sensor.BinCollectionDay:
+  friendly_name: Bin Collection Day
+  icon: mdi:calendar-clock
+sensor.cars_count:
+  friendly_name: Count of cars on drive
+  icon: mdi:car-multiple
+sensor.cars_reg:
+  friendly_name: Car Registrations
+  icon: mdi:car-side
+sensor.HotWaterBoostTimeRemaining:
+  friendly_name: Boost Hot Water Time Remaining
+  icon: mdi:progress-clock
+sensor.HotWaterBoost:
+  friendly_name: Hot Water Boost
+  icon: mdi:gauge
+sensor.HotWater:
+  friendly_name: Hot Water
+  icon: mdi:water
+sensor.home2work:
+  friendly_name: Home -> Work
+  icon: mdi:domain
+sensor.work2home:
+  friendly_name: Work -> Home
+  icon: mdi:home
+sensor.kirstyhome2work:
+  friendly_name: Home -> Work
+  icon: mdi:home
+sensor.kirstywork2home:
+  friendly_name: Work -> Home
+  icon: mdi:domain
+switch.guestwifimain:
+  icon: mdi:wifi
+switch.guestwifiupstairs:
+  icon: mdi:wifi
+sensor.guestwifipassword:
+  icon: mdi:lastpass
+sensor.guestwifiusercount:
+  icon: mdi:account-plus
+switch.restartinternet:
+  icon: mdi:cloud
+device_tracker.00_11_32_82_fa_ab:
+  friendly_name: Synology DS418play NIC 1
+  icon: mdi:server-network
+device_tracker.00_11_32_82_fa_ac:
+  friendly_name: Synology DS418play NIC 2
+  icon: mdi:server-network
+device_tracker.00_ee_bd_aa_b6_a4:
+  friendly_name: HTCAndroidWifiTester
+  icon: mdi:cellphone-android
+device_tracker.0c_f9_c0_a6_93_9a:
+  friendly_name: SkyQ
+  icon: mdi:set-top-box
+device_tracker.10_ce_a9_cc_96_c3:
+  friendly_name: RingFloodLight
+  icon: mdi:track-light
+device_tracker.18_b4_30_c0_f1_45:
+  friendly_name: NestThermostat
+  icon: mdi:thermostat
+device_tracker.30_b5_c2_84_c7_0e:
+  friendly_name: LoungeRouter
+  icon: mdi:router-wireless
+device_tracker.34_08_04_a0_08_82:
+  friendly_name: DLinkNas
+  icon: mdi:server
+device_tracker.34_15_13_c7_c6_64:
+  friendly_name: RingChime
+  icon: mdi:bell
+device_tracker.40_9c_28_12_36_c0:
+  friendly_name: RobsiPhone
+  icon: mdi:cellphone-iphone
+device_tracker.50_c7_bf_c7_c2_48:
+  friendly_name: HallwayLight
+  icon: mdi:lightbulb-on-outline
+device_tracker.58_b3_fc_d0_a5_6b:
+  friendly_name: BillionRouterSwitch
+  icon: mdi:router-wireless-settings
+device_tracker.58_b3_fc_d0_a6_0f:
+  friendly_name: ElectricBlanket
+  icon: mdi:radiator
+device_tracker.58_ef_68_97_0a_c1:
+  friendly_name: LoungeLight1
+  icon: mdi:lightbulb-on-outline
+device_tracker.58_ef_68_97_13_0d:
+  friendly_name: LoungeLight2
+  icon: mdi:lightbulb-on-outline
+device_tracker.60_01_94_52_81_e7:
+  friendly_name: GarageDoor
+  icon: mdi:garage
+device_tracker.60_03_47_35_56_94:
+  friendly_name: BillionRouter
+  icon: mdi:router-wireless
+  ip: 192.168.0.254
+device_tracker.9c_f4_8e_5b_d7_79:
+  friendly_name: Kirstys-iPhone
+  icon: mdi:cellphone-iphone
+device_tracker.60_e3_27_4f_cc_e0:
+  friendly_name: UpstairsRouter
+  icon: mdi:router-wireless
+device_tracker.90_8d_78_99_3f_5a:
+  friendly_name: MotionSensorHallway
+  icon: mdi:exit-run
+device_tracker.90_8d_78_99_3b_9e:
+  friendly_name: MotionSensorLanding
+  icon: mdi:exit-run
+device_tracker.90_8d_78_99_3b_3f:
+  friendly_name: MotionSensorKitchen
+  icon: mdi:exit-run
+device_tracker.90_8d_78_99_3a_9a:
+  friendly_name: MotionSensorGarage
+  icon: mdi:exit-run
+device_tracker.8c_3b_ad_b8_b0_3d:
+  friendly_name: SwitchHallway
+  icon: mdi:lan
+device_tracker.78_0f_77_d4_40_eb:
+  friendly_name: MatsterEnsuiteUnderfloorHeating
+  icon: mdi:radiator
+device_tracker.6c_ad_f8_75_77_92:
+  friendly_name: ChromeCast
+  icon: mdi:google-chrome
+device_tracker.a4_2b_b0_a5_b2_5a:
+  friendly_name: GarageRouter
+  icon: mdi:router-wireless
+device_tracker.e0_4f_43_a2_32_b0:
+  friendly_name: RingDoorBell
+  icon: mdi:camera-metering-center
+device_tracker.e8_de_27_59_ae_ea:
+  friendly_name: GardenRouter
+  icon: mdi:router-wireless
+device_tracker.cc_40_d0_55_11_e2:
+  friendly_name: LoungeSwitch
+  icon: mdi:lan
+device_tracker.c0_41_f6_7a_13_81:
+  friendly_name: LGTV
+  icon: mdi:television
+switch.garagerouter5g:
+  friendly_name: Garage Router 5G
+  icon: mdi:wifi
+switch.garagerouter2g:
+  friendly_name: Garage Router 2G
+  icon: mdi:wifi
+device_tracker.router:
+  friendly_name: MainRouter
+  icon: mdi:router-wireless
+sensor.weatherstation_batt_status:
+  friendly_name: Weather Station Battery Status
+  icon: mdi:battery
+sensor.uvstation_batt_status:
+  friendly_name: UV Station Battery Status
+  icon: mdi:battery
+switch.ethansbedroomlight:
+  icon: mdi:lamp
+switch.ionabedroom:
+  icon: mdi:lamp
+switch.hallwaylight:
+  icon: mdi:floor-lamp
+switch.studydesklight:
+  icon: mdi:desk-lamp
+switch.lounge_lamp_1:
+  icon: mdi:lamp
+switch.lounge_lamp_2:
+  icon: mdi:lamp
+switch.porchlight:
+  icon: mdi:lightbulb-on
+switch.christmaslights:
+  friendly_name: Christmas Lights
+  icon: mdi:pine-tree
+sensor.my_currenttemperaturec: {}
+sensor.mycurrenttemperaturef: {}

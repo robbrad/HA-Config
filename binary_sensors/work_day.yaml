@@ -1,0 +1,4 @@
+---
+- platform: workday
+  country: 'UK'
+  workdays: [mon, tue, wed, thu, fri]

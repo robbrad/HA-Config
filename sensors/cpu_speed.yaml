@@ -1,0 +1,4 @@
+---
+# https://home-assistant.io/components/sensor.cpuspeed/
+- platform: cpuspeed
+  name: CPU

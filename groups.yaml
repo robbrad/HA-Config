@@ -1,0 +1,12 @@
+---
+LoungeLamps:
+  name: Lounge Lamps
+  entities:
+    - switch.Lounge_Lamp_1
+    - switch.Lounge_Lamp_2
+
+AmbiTvSwitches:
+  entities:
+    - switch.ambitvmode1
+    - switch.ambitvmode2
+    - switch.ambitvmode3

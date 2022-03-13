@@ -1,0 +1,26 @@
+---
+# https://home-assistant.io/components/notify/
+
+####################################################
+#                                                  #
+#                NOTIFICATIONS                     #
+#                                                  #
+####################################################
+
+# https://home-assistant.io/components/notify.smtp/
+
+- name: Home_Assistant
+  platform: smtp
+  server: smtp.gmail.com
+  port: 587
+  sender: !secret notification_sender
+  starttls: true
+  username: !secret notification_username
+  password: !secret notification_password
+  recipient: !secret notification_recipient
+
+  ####################################################
+  #                                                  #
+  #           END OF CONFIGURATION FILE              #
+  #                                                  #
+  ####################################################

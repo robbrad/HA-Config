@@ -1,0 +1,75 @@
+---
+- platform: command_line
+  switches:
+   mainrouter2g:
+    command_on: '/home/rob/scripts/wifi/enableWifi 192.168.0.1 0 2G'
+    command_off: '/home/rob/scripts/wifi/enableWifi 192.168.0.1 1 2G'
+    command_state: '/home/rob/scripts/wifi/WifiStatus 192.168.0.1 2G'
+    value_template: '{{ value == "on" }}'
+    friendly_name: Main Router 2G Wifi
+   loungrouter2g:
+    command_on: '/home/rob/scripts/wifi/enableWifi 192.168.0.251 0 2G'
+    command_off: '/home/rob/scripts/wifi/enableWifi 192.168.0.251 1 2G'
+    command_state: '/home/rob/scripts/wifi/WifiStatus 192.168.0.251 2G'
+    value_template: '{{ value == "on" }}'
+    friendly_name: Lounge Router 2G Wifi
+   upstairsrouter2g:
+    command_on: '/home/rob/scripts/wifi/enableWifi 192.168.0.252 0 2G'
+    command_off: '/home/rob/scripts/wifi/enableWifi 192.168.0.252 1 2G'
+    command_state: '/home/rob/scripts/wifi/WifiStatus 192.168.0.252 2G'
+    value_template: '{{ value == "on" }}'
+    friendly_name: Upstairs Router 2G Wifi
+   gardenrouter2g:
+    command_on: '/home/rob/scripts/wifi/enableWifi 192.168.0.253 0 2G'
+    command_off: '/home/rob/scripts/wifi/enableWifi 192.168.0.253 1 2G'
+    command_state: '/home/rob/scripts/wifi/WifiStatus 192.168.0.253 2G'
+    value_template: '{{ value == "on" }}'
+    friendly_name: Garden Router 2G Wifi
+   garagerouter2g:
+    command_on: '/home/rob/scripts/wifi/enableWifi 192.168.0.247 0 2G'
+    command_off: '/home/rob/scripts/wifi/enableWifi 192.168.0.247 1 2G'
+    command_state: '/home/rob/scripts/wifi/WifiStatus 192.168.0.247 2G'
+    value_template: '{{ value == "on" }}'
+    friendly_name: Garage Router 2G Wifi
+   mainrouter5g:
+    command_on: '/home/rob/scripts/wifi/enableWifi 192.168.0.1 0 5G'
+    command_off: '/home/rob/scripts/wifi/enableWifi 192.168.0.1 1 5G'
+    command_state: '/home/rob/scripts/wifi/WifiStatus 192.168.0.1 5G'
+    value_template: '{{ value == "on" }}'
+    friendly_name: Main Router 5G Wifi
+   loungrouter5g:
+    command_on: '/home/rob/scripts/wifi/enableWifi 192.168.0.251 0 5G'
+    command_off: '/home/rob/scripts/wifi/enableWifi 192.168.0.251 1 5G'
+    command_state: '/home/rob/scripts/wifi/WifiStatus 192.168.0.251 5G'
+    value_template: '{{ value == "on" }}'
+    friendly_name: Lounge Router 5G Wifi
+   upstairsrouter5g:
+    command_on: '/home/rob/scripts/wifi/enableWifi 192.168.0.252 0 5G'
+    command_off: '/home/rob/scripts/wifi/enableWifi 192.168.0.252 1 5G'
+    command_state: '/home/rob/scripts/wifi/WifiStatus 192.168.0.252 5G'
+    value_template: '{{ value == "on" }}'
+    friendly_name: Upstairs Router 5G Wifi
+   gardenrouter5g:
+    command_on: '/home/rob/scripts/wifi/enableWifi 192.168.0.253 0 5G'
+    command_off: '/home/rob/scripts/wifi/enableWifi 192.168.0.253 1 5G'
+    command_state: '/home/rob/scripts/wifi/WifiStatus 192.168.0.253 5G'
+    value_template: '{{ value == "on" }}'
+    friendly_name: Garden Router 5G Wifi
+   garagerouter5g:
+    command_on: '/home/rob/scripts/wifi/enableWifi 192.168.0.247 0 5G'
+    command_off: '/home/rob/scripts/wifi/enableWifi 192.168.0.247 1 5G'
+    command_state: '/home/rob/scripts/wifi/WifiStatus 192.168.0.247 5G'
+    value_template: '{{ value == "on" }}'
+    friendly_name: Garage Router 5G Wifi
+   guestwifimain:
+    command_on: '/home/rob/scripts/wifi/enableWifi 192.168.0.1 0 Guest'
+    command_off: '/home/rob/scripts/wifi/enableWifi 192.168.0.1 1 Guest'
+    command_state: '/home/rob/scripts/wifi/WifiStatus 192.168.0.1 Guest'
+    value_template: '{{ value == "on" }}'
+    friendly_name: Guest Wifi Main
+   guestwifiupstairs:
+    command_on: '/home/rob/scripts/wifi/enableWifi 192.168.0.252 0 Guest'
+    command_off: '/home/rob/scripts/wifi/enableWifi 192.168.0.252 1 Guest'
+    command_state: '/home/rob/scripts/wifi/WifiStatus 192.168.0.252 Guest'
+    value_template: '{{ value == "on" }}'
+    friendly_name: Guest Wifi Upstairs

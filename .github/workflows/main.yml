@@ -1,0 +1,87 @@
+---
+name: Home Assistant CI
+
+# yamllint disable-line rule:truthy
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: 0 12 * * *
+
+jobs:
+  yamllint:
+    name: 🧹 yamllint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out configuration from GitHub
+        uses: actions/checkout@v2.3.5
+      - name: Run yamllint
+        uses: frenck/action-yamllint@v1.1.1
+
+  remarklint:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Check out configuration from GitHub
+        uses: actions/checkout@v2.3.5
+      - name: Running Remark lint
+        uses: "docker://pipelinecomponents/remark-lint:latest"
+        continue-on-error: true
+        with:
+          args: >
+            "remark --no-stdout --color --frail --use preset-lint-recommended ."
+
+  home-assistant:
+    name: "Home Assistant Core ${{ matrix.version }} Configuration Check"
+    needs: [yamllint]
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        version: ["stable", "beta", "dev"]
+    steps:
+      - name: Check out configuration from GitHub
+        uses: actions/checkout@v2.3.5
+      - name: Create Deepstack save folder
+        run: |
+          mkdir -p ./deepstacksavefolder
+      - name: Create empty custom components folder
+        run: |
+          if [ -d "custom_components" ]; then rm -Rf custom_components; fi
+          mkdir -p ./custom_components
+      - name: Clone custom component HASS-Deepstack-object
+        run: |
+          git clone https://github.com/robmarkcole/HASS-Deepstack-object.git
+          mv -v HASS-Deepstack-object/custom_components/* ./custom_components/
+      - name: Clone custom component dlink_hnap
+        run: |
+          git clone https://github.com/postlund/dlink_hnap.git
+          mv -v dlink_hnap/custom_components/* ./custom_components/
+      - name: Clone custom component ha-birthdays
+        run: |
+          git clone https://github.com/Miicroo/ha-birthdays.git
+          mv -v ha-birthdays/custom_components/* ./custom_components/
+      - name: Clone custom component hass-floureon
+        run: |
+          git clone https://github.com/algirdasc/hass-floureon.git
+          mv -v hass-floureon/custom_components/* ./custom_components/
+      - name: Clone custom component hildebrandglow
+        run: |
+          git clone https://github.com/unlobito/ha-hildebrandglow.git
+          mv -v ha-hildebrandglow/custom_components/* ./custom_components/
+      - name: Clone custom component weatherbit
+        run: |
+          git clone https://github.com/briis/weatherbit.git weatherbit_git
+          mv -v weatherbit_git/custom_components/* ./custom_components/
+      - name: Clone custom component eufy_vacuum
+        run: |
+          git clone https://github.com/pbulteel/eufy_vacuum.git eufy
+          mv -v eufy/custom_components/* ./custom_components/
+      - name: Clone custom component classificationbox
+        run: |
+          git clone https://github.com/robmarkcole/HASS-Machinebox-Classificationbox.git classificationbox_git
+          mv -v classificationbox_git/custom_components/* ./custom_components/
+      - name: Run Home Assistant Configuration Check
+        uses: frenck/action-home-assistant@v1.1.1
+        with:
+          path: "."
+          secrets: ./test_secrets.yaml
+          version: "${{ matrix.version }}"

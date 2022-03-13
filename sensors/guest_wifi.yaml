@@ -1,0 +1,8 @@
+---
+- platform: command_line
+  command: '/home/rob/scripts/wifi/guestPassword'
+  name: GuestWifiPassword
+
+- platform: command_line
+  command: '/home/rob/scripts/wifi/checkGuestDevices 192.168.0.1'
+  name: GuestWifiUserCount

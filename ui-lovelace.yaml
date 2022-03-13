@@ -1,0 +1,4 @@
+---
+resources:
+  - type: js
+    url: /home/rob/.homeassistant/custom-lovelace/www/group-card.js?v=1

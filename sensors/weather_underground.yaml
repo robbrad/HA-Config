@@ -1,0 +1,25 @@
+---
+# #https://home-assistant.io/components/sensor.wunderground/
+#   - platform: wunderground
+#     api_key: !secret wu_api_key
+#     pws_id: !secret pwsid
+#     monitored_conditions:
+#       - temp_f
+#       - precip_today_in
+#       - wind_string
+#       - relative_humidity
+#       - weather
+#       - weather_1d
+#       - weather_1n
+#       - weather_2d
+#       - weather_2n
+#       - weather_3d
+#       - weather_3n
+#       - weather_4d
+#       - weather_4n
+#       - weather_1h
+#       - weather_6h
+#       - visibility_mi
+#       - precip_1hr_in
+#       - feelslike_f
+#       - UV

@@ -1,0 +1,12 @@
+---
+- platform: template
+  sensors:
+    cars_count:
+      value_template: >
+        '{{states.image_processing.openalpr_frontfloodlight.attributes["vehicles"]}}'
+
+- platform: template
+  sensors:
+    cars_reg:
+      value_template: >
+        '{{states.image_processing.openalpr_frontfloodlight.attributes["plates"]}}'

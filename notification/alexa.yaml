@@ -1,0 +1,4 @@
+---
+- platform: command_line
+  name: 'All Alexas'
+  command: "/home/rob/scripts/ha-alexa-tts/alexa_wrapper.sh -d 'ALL'"

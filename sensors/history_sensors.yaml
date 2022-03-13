@@ -1,0 +1,16 @@
+---
+- platform: history_stats
+  name: Heating On Today
+  entity_id: sensor.entryway_thermostat_hvac_state
+  state: 'heat'
+  type: time
+  start: '{{ now().replace(hour=0).replace(minute=0).replace(second=0) }}'
+  end: '{{ now() }}'
+
+- platform: history_stats
+  name: Daily Tv Usage
+  entity_id: switch.lgtv
+  state: 'on'
+  type: time
+  start: '{{ now().replace(hour=0).replace(minute=0).replace(second=0) }}'
+  end: '{{ now() }}'

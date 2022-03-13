@@ -1,0 +1,37 @@
+---
+# Door SENSORS
+- platform: mqtt
+  name: "Front door"
+  state_topic: "tele/sonoff/RESULT"
+  value_template: '{{value_json.RfReceived.Data}}'
+  payload_on: "C6FE0A"
+  payload_off: "C6FE0E"
+  device_class: door
+  qos: 1
+
+- platform: mqtt
+  name: "Back door"
+  state_topic: "tele/sonoff/RESULT"
+  value_template: '{{value_json.RfReceived.Data}}'
+  payload_on: "CDD00A"
+  payload_off: "CDD00E"
+  device_class: door
+  qos: 1
+
+- platform: mqtt
+  name: "Patio door"
+  state_topic: "tele/sonoff/RESULT"
+  value_template: '{{value_json.RfReceived.Data}}'
+  payload_on: "14B40A"
+  payload_off: "14B40E"
+  device_class: door
+  qos: 1
+
+- platform: mqtt
+  name: "Ensuite Window"
+  state_topic: "tele/sonoff/RESULT"
+  value_template: '{{value_json.RfReceived.Data}}'
+  payload_on: "0DC10A"
+  payload_off: "0DC10E"
+  device_class: window
+  qos: 1

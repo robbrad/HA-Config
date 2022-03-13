@@ -1,0 +1,93 @@
+---
+- platform: openalpr_cloud
+  scan_interval: 10000
+  api_key: !secret openalpr_cloud
+  region: gb
+  source:
+    - entity_id: camera.frontfloodlight
+
+- platform: deepstack_object
+  ip_address: localhost
+  port: 5000
+  save_file_folder: !secret deepstacksavefolder
+  save_timestamped_file: true
+  show_boxes: true
+  targets:
+    - target: person
+    - target: car
+  source:
+    - entity_id: camera.frontfloodlight
+
+- platform: deepstack_object
+  ip_address: localhost
+  port: 5000
+  save_file_folder: !secret deepstacksavefolder
+  save_timestamped_file: true
+  show_boxes: true
+  targets:
+    - target: person
+    - target: car
+  source:
+    - entity_id: camera.frontdoor
+
+- platform: deepstack_object
+  ip_address: localhost
+  port: 5000
+  save_file_folder: !secret deepstacksavefolder
+  save_timestamped_file: true
+  show_boxes: true
+  targets:
+    - target: person
+  source:
+    - entity_id: camera.GAC
+
+- platform: deepstack_object
+  ip_address: localhost
+  port: 5000
+  save_file_folder: !secret deepstacksavefolder
+  save_timestamped_file: true
+  show_boxes: true
+  targets:
+    - target: person
+  source:
+    - entity_id: camera.BDC
+
+- platform: deepstack_object
+  ip_address: localhost
+  port: 5000
+  save_file_folder: !secret deepstacksavefolder
+  save_timestamped_file: true
+  show_boxes: true
+  targets:
+    - target: person
+  source:
+    - entity_id: camera.LSC
+
+- platform: deepstack_object
+  ip_address: localhost
+  port: 5000
+  save_file_folder: !secret deepstacksavefolder
+  save_timestamped_file: true
+  show_boxes: true
+  targets:
+    - target: person
+  source:
+    - entity_id: camera.BGC
+
+- platform: deepstack_object
+  ip_address: localhost
+  port: 5000
+  save_file_folder: !secret deepstacksavefolder
+  save_timestamped_file: true
+  show_boxes: true
+  targets:
+    - target: person
+  source:
+    - entity_id: camera.RSC
+
+- platform: classificationbox
+  ip_address: localhost
+  port: 8099
+  confidence: 50
+  source:
+    - entity_id: camera.LSC

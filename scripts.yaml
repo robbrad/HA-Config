@@ -1,0 +1,7 @@
+---
+sky_q_living_room_power:
+  alias: Toggle Sky Q Living Room power
+  sequence:
+    - service: shell_command.cmd_skyq_lr_command
+      data_template:
+        command: 'power'

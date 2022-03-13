@@ -1,0 +1,5 @@
+---
+- platform: template
+  sensors:
+    dark_sky_outside:
+      value_template: '{{ states.weather.dark_sky.attributes["temperature"] }}'

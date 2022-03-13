@@ -1,0 +1,26 @@
+---
+- platform: mqtt
+  name: gac_motion
+  state_topic: "emqtt/CameraMotionGarage"
+  payload_on: "ON"
+  payload_off: "OFF"
+- platform: mqtt
+  name: bdc_motion
+  state_topic: "emqtt/CameraMotionBackdoor"
+  payload_on: "ON"
+  payload_off: "OFF"
+- platform: mqtt
+  name: lsc_motion
+  state_topic: "emqtt/CameraMotionLeftSideReturn"
+  payload_on: "ON"
+  payload_off: "OFF"
+- platform: mqtt
+  name: bgc_motion
+  state_topic: "emqtt/CameraMotionBackGarden"
+  payload_on: "ON"
+  payload_off: "OFF"
+- platform: mqtt
+  name: rsc_motion
+  state_topic: "emqtt/CameraMotionRightSideReturn"
+  payload_on: "ON"
+  payload_off: "OFF"

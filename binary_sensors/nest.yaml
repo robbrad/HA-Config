@@ -1,0 +1,15 @@
+---
+- platform: nest
+  monitored_conditions:
+    - online
+    - fan
+    - is_using_emergency_heat
+    - is_locked
+    - has_leaf
+
+- platform: template
+  sensors:
+    downstairs_thermostat_away_mode:
+      friendly_name: "Nest Thermostat Away Mode"
+      value_template: >
+        "{{ is_state_attr('climate.entryway', 'away_mode', 'off') }}"

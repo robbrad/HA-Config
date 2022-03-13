@@ -1,0 +1,21 @@
+---
+- platform: command_line
+  switches:
+   ambitvmode1:
+    command_on: 'curl 192.168.0.77:80/ambi_tv.php?mode=1'
+    command_off: 'curl 192.168.0.77:80/ambi_tv.php'
+    command_state: 'curl 192.168.0.77:80/ambi_tv_status.php'
+    value_template: '{{ value == "mode1" }}'
+    friendly_name: Ambi-TV 1
+   ambitvmode2:
+    command_on: 'curl 192.168.0.77:80/ambi_tv.php?mode=2'
+    command_off: 'curl 192.168.0.77:80/ambi_tv.php'
+    command_state: 'curl 192.168.0.77:80/ambi_tv_status.php'
+    value_template: '{{ value == "mode2" }}'
+    friendly_name: Ambi-TV 2
+   ambitvmode3:
+    command_on: 'curl 192.168.0.77:80/ambi_tv.php?mode=3'
+    command_off: 'curl 192.168.0.77:80/ambi_tv.php'
+    command_state: 'curl 192.168.0.77:80/ambi_tv_status.php'
+    value_template: '{{ value == "mode3" }}'
+    friendly_name: Ambi-TV 3

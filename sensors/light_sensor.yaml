@@ -1,0 +1,25 @@
+---
+#  - platform: rest
+#    resource: http://192.168.0.68
+#    scan_interval: 60
+#    name: LUXValue
+#    value_template: '{{ value_json.lightdata }}'
+#    unit_of_measurement: "lux"
+
+#  - platform: template
+#    sensors:
+#      lux_percent:
+#        value_template: >
+#         '{{ 100-((states.sensor.luxvalue.state|float)/1023*100)|round(2) }}'
+#        unit_of_measurement: "%"
+#        friendly_name: lux_percent
+- platform: template
+  sensors:
+    dark_outside:
+      value_template: >
+        {{ state_attr("sun.sun","elevation")|float < 3
+        or (state_attr("sun.sun","elevation")|float
+        < 4.5 and states("sensor.weatherbit_cloud_coverage")|float > 80)
+        or (state_attr("sun.sun","elevation")|float
+        < 6.5 and states("sensor.weatherbit_cloud_coverage")|float > 85)
+        or (states("sensor.weatherbit_cloud_coverage")|float > 90) }}

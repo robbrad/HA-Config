@@ -1,0 +1,10 @@
+---
+- platform: command_line
+  command: '/home/rob/scripts/parseBinCollection.sh'
+  name: BinCollectionType
+- platform: command_line
+  command: '/home/rob/scripts/parseBinCollectionDate.sh'
+  name: BinCollectionDay
+- platform: command_line
+  command: '/home/rob/scripts/parseBinCollection2.sh'
+  name: BinCollectionType2

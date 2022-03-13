@@ -1,0 +1,66 @@
+---
+# Commute to Work
+- platform: waze_travel_time
+  name: Time to Work
+  origin: !secret home_coords
+  destination: !secret rob_work_coords
+  region: 'EU'
+
+- platform: waze_travel_time
+  name: Time to Home
+  origin: !secret rob_work_coords
+  destination: !secret home_coords
+  region: 'EU'
+
+- platform: waze_travel_time
+  name: KirstyWork2Home
+  origin: !secret kirsty_work_coords
+  destination: !secret home_coords
+  region: 'EU'
+
+- platform: waze_travel_time
+  name: KirstyHome2Work
+  origin: !secret home_coords
+  destination: !secret kirsty_work_coords
+  region: 'EU'
+
+# Time-Date Sensor
+- platform: time_date
+  display_options:
+    - 'time'
+
+- platform: uptime
+  name: "HA runtime in minutes"
+
+- platform: template
+  sensors:
+    time_to_leave_for_work:
+      value_template: >
+        {% set t = strptime(states.sensor.time.state,'%H:%M') %}
+        {{ ( t.hour + t.minute / 60 ) > ( 9 - states.sensor.time_to_work.state
+          | int / 60) }}
+      friendly_name: 'Time to Leave for Work'
+
+- platform: template
+  sensors:
+    my_traffic_density_to_work:
+      friendly_name: Traffic to Work
+      value_template: >
+        {% if states("sensor.time_to_work") | int >= 30 %}
+          Heavy
+        {% elif states("sensor.time_to_work") |
+        int < 30 and states("sensor.time_to_work") | int >= 25 %}
+          Moderate
+        {% elif states("sensor.time_to_work") |
+        int < 25 and states("sensor.time_to_work") | int >= 10 %}
+          Normal
+        {% else %}
+          unknown
+        {% endif %}
+
+- platform: time_date
+  display_options:
+    - 'time'
+    - 'date'
+    - 'date_time'
+    - 'time_date'

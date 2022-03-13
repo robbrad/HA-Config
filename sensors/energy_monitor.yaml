@@ -1,0 +1,19 @@
+---
+####################################################
+#                                                  #
+#            Energy Monitor                        #
+#                                                  #
+####################################################
+#  - platform: emoncms
+#    api_key: !secret emoncms
+#    url: http://192.168.1.62/emoncms/
+#    id: 6
+#
+#  - platform: template
+#    sensors:
+#      overall_elec_spend:
+#        friendly_name: 'Overall Electricity Spend'
+#        value_template: >-
+#          {{ (((states("sensor.emoncms6_overallkwh")|
+#                float * 16.097))+14.7)| round(2) | float }}
+#        unit_of_measurement: 'p'

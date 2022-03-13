@@ -1,0 +1,14 @@
+---
+# https://home-assistant.io/components/sensor.command_line/
+- platform: command_line
+  command: >
+    python3 -c
+    "import requests;
+    raw_json = requests.get('https://pypi.python.org/pypi/homeassistant/json')
+    raw_json = raw_json.json()['info']['version']
+    print(raw_json)"
+  name: Current HA Version
+
+- platform: command_line
+  name: Installed version
+  command: "head -5 /home/rob/.homeassistant/.HA_VERSION"

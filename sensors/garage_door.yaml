@@ -1,0 +1,27 @@
+---
+- platform: template
+  sensors:
+    garage_door_status:
+      friendly_name: 'Garage Door Status'
+      value_template: '{% if states.cover.garagedoor %}
+        {% if states.cover.garagedoor.attributes["door_state"] == "open" %}
+          Open
+        {% elif states.cover.garagedoor.attributes["door_state"] == "closed" %}
+          Closed
+        {% elif states.cover.garagedoor.attributes["door_state"] == "opening" %}
+          Opening
+        {% elif states.cover.garagedoor.attributes["door_state"] == "closing" %}
+          Closing
+        {% else %}
+          Unknown
+        {% endif %}
+        {% else %}
+        n/a
+        {% endif %}'
+
+- platform: template
+  sensors:
+    garage_door_distance:
+      friendly_name: 'Garage Door Distance'
+      value_template: "{{ state_attr('cover.garagedoor', 'distance_sensor') }}"
+      unit_of_measurement: 'count'

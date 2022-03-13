@@ -1,0 +1,28 @@
+---
+# https://home-assistant.io/components/input_boolean/
+
+####################################################
+#                                                  #
+#                 VACATION MODE                    #
+#                                                  #
+####################################################
+
+vacation:
+  name: Vacation Mode
+  initial: false
+
+upgradehomeassistant:
+  name: Upgrade Home Assistant
+  initial: false
+
+awaymode:
+  name: Away Mode
+
+football:
+  name: Football Night
+
+####################################################
+#                                                  #
+#           END OF CONFIGURATION FILE              #
+#                                                  #
+####################################################

@@ -1,0 +1,51 @@
+# Example .gitignore file for your config dir.
+# A * ensures that everything will be ignored.
+*
+
+# You can whitelist files/folders with !, these will not be ignored.
+!*.yaml
+!.gitignore
+!assets
+!*.md
+!*.py
+!*.jpg
+!*.JPG
+!*.svg
+!alerts
+!binary_sensors
+!imageprocessing
+!custom_components
+!custom_components/dlink_motion_sensor
+!custom_components/dlink_motion_sensor/manifest.json
+!custom_components/floureon
+!custom_components/floureon/manifest.json
+!custom_components/amazon_rekognition
+!custom_components/amazon_rekognition/manifest.json
+!custom_components/eufy_vacuum
+
+!custom_components/amazon_rekognition/manifest.json
+!notification
+!packages
+!panels
+!python_scripts
+!sensors
+!switches
+!templates
+!www
+
+
+# Ignore folders.
+.storage
+.cloud
+.google.token
+icloud
+tensorflow
+__pycache__
+
+# Ensure these YAML files are ignored, otherwise your secret data/credentials will leak.
+ip_bans.yaml
+secrets.yaml
+secrets_alexa.yaml
+known_devices.yaml
+ip_resolve.yaml
+wol.yaml

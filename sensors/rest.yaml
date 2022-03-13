@@ -1,0 +1,128 @@
+---
+# Octprint Enclosure Plugin
+- platform: rest
+  name: printer_enclosure_temp
+  device_class: temperature
+  unit_of_measurement: "°C"
+  resource: http://192.168.0.44/plugin/enclosure/inputs/1
+  value_template: '{{ value_json.temp_sensor_temp }}'
+
+- platform: rest
+  name: printer_enclosure_hum
+  device_class: humidity
+  unit_of_measurement: "%"
+  resource: http://192.168.0.44/plugin/enclosure/inputs/1
+  value_template: '{{ value_json.temp_sensor_humidity }}'
+
+- platform: rest
+  resource: http://192.168.0.30:8123/api/config/core/check_config
+  name: ConfigValidationRest
+  method: POST
+  scan_interval: 21600
+  value_template: '{{ value_json.result }}'
+  headers:
+    Authorization: !secret HAApiAuth
+
+- platform: rest
+  name: pws_report
+  json_attributes:
+    - observations
+  value_template: '{{ value_json["observations"][0]["obsTimeLocal"].title() }}'
+  resource: !secret pwsresource
+  scan_interval: 300
+
+- platform: template
+  sensors:
+    pws_location:
+      value_template: >
+        '{{ states.sensor.pws_report.
+        attributes.observations[0].neighborhood }}'
+    pws_station_id:
+      value_template: >
+        '{{ states.sensor.pws_report.attributes.observations[0].stationID }}'
+    pws_type:
+      value_template: >
+        '{{ states.sensor.pws_report.
+        attributes.observations[0].softwareType }}'
+    pws_wind_dir:
+      value_template: >
+        '{{ states.sensor.pws_report.
+        attributes.observations[0].winddir }}'
+    pws_wind_gust:
+      value_template: >
+        '{{ states.sensor.pws_report.
+        attributes.observations[0].windGust }}'
+    pws_wind_speed:
+      value_template: >
+        '{{ states.sensor.pws_report.
+        attributes.observations[0].imperial.windSpeed }}'
+    pws_humidity:
+      value_template: >
+        '{{ states.sensor.pws_report.
+        attributes.observations[0].humidity }}'
+    pws_precip_total:
+      value_template: >
+        '{{ states.sensor.pws_report.
+        attributes.observations[0].imperial.precipTotal }}'
+    pws_precip_rate:
+      value_template: >
+        '{{ states.sensor.pws_report.
+        attributes.observations[0].imperial.precipRate }}'
+    pws_temp:
+      value_template: >
+        '{{ states.sensor.pws_report.
+        attributes.observations[0].imperial.temp}}'
+    pws_uv:
+      value_template: >
+        '{{ states.sensor.pws_report.
+        attributes.observations[0].uv }}'
+    pws_heatindex:
+      value_template: >
+        '{{ states.sensor.pws_report.
+        attributes.observations[0].imperial.heatindex }}'
+    pws_windchill:
+      value_template: >
+        '{{ states.sensor.pws_report.
+        attributes.observations[0].imperial.windchill }}'
+    pws_dewpt:
+      value_template: >
+        '{{ states.sensor.pws_report.
+        attributes.observations[0].imperial.dewpt }}'
+    pws_pressure:
+      value_template: >
+        '{{ states.sensor.pws_report.
+        attributes.observations[0].imperial.pressure }}'
+
+- platform: rest
+  name: MediaPad
+  json_attributes:
+    - batteryLevel
+    - kioskMode
+    - screenBrightness
+    - motionDetectorState
+    - maintenanceMode
+    - appFreeMemory
+    - appUsedMemory
+    - totalFreeMemory
+    - totalUsedMemory
+    - hostname4
+    - ip4
+    - mac
+    - locationLatitude
+    - locationLongitude
+    - locationAltitude
+    - startUrl
+    - currentPage
+  resource: !secret mediapad_rest
+  value_template: '{{ value_json.isScreenOn }}'
+
+- platform: template
+  sensors:
+    mediapad_battery_level:
+      friendly_name: "mediapad_battery_level"
+      unit_of_measurement: '%'
+      value_template: "{{ states.sensor.mediapad.attributes.batteryLevel }}"
+    mediapad_screen_brightness:
+      friendly_name: "mediapad_screenBrightness"
+      unit_of_measurement: '%'
+      value_template: "{{ states.sensor.mediapad.attributes.screenBrightness }}"

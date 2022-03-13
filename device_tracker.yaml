@@ -1,0 +1,38 @@
+---
+# https://home-assistant.io/components/device_tracker/
+####################################################
+#                                                  #
+#       DEVICE TRACKER - Rob's iPHONE             #
+#                                                  #
+####################################################
+# https://home-assistant.io/components/device_tracker.icloud/
+- platform: icloud
+  username: !secret robs_icloud_username
+  password: !secret robs_icloud_password
+####################################################
+#                                                  #
+#              DEVICE TRACKER - NMAP               #
+#                                                  #
+####################################################
+# https://home-assistant.io/components/device_tracker.nmap_tracker/
+
+#  - platform: nmap_tracker
+#    hosts:
+#      - 192.168.0.1-254
+#    home_interval: 1
+#    exclude:
+#      - 192.168.0.160
+#      - 192.168.0.83
+#      - 192.168.0.84
+
+####################################################
+#                                                  #
+#             DEVICE TRACKER - PING                #
+#                                                  #
+####################################################
+
+####################################################
+#                                                  #
+#            END OF CONFIGUATION FILE              #
+#                                                  #
+####################################################

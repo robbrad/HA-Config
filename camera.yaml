@@ -1,0 +1,49 @@
+---
+- platform: generic
+  name: GAC
+  still_image_url: !secret ReoCameraGarageURL
+  stream_source: !secret CameraGarage_Source
+- platform: generic
+  name: BDC
+  still_image_url: !secret ReoCameraBackDoorURL
+  stream_source: !secret CameraBackDoor_Source
+- platform: generic
+  name: LSC
+  still_image_url: !secret ReoCameraSideReturnURL
+  stream_source: !secret CameraSideReturn_Source
+- platform: generic
+  name: BGC
+  still_image_url: !secret ReoCameraBackGardenURL
+  stream_source: !secret CameraBackGarden_Source
+- platform: generic
+  name: RSC
+  still_image_url: !secret ReoCameraShedReturnURL
+  stream_source: !secret CameraShedReturn_Source
+- platform: generic
+  name: GAC_pd
+  still_image_url: "http://192.168.0.30:8123/local/\
+    person_detected/deepstack_object_gac_latest.jpg"
+- platform: generic
+  name: LSC_pd
+  still_image_url: "http://192.168.0.30:8123/local/\
+    person_detected/deepstack_object_lsc_latest.jpg"
+- platform: generic
+  name: RSC_pd
+  still_image_url: "http://192.168.0.30:8123/local/\
+    person_detected/deepstack_object_rsc_latest.jpg"
+- platform: generic
+  name: BGC_pd
+  still_image_url: "http://192.168.0.30:8123/local/\
+    person_detected/deepstack_object_bgc_latest.jpg"
+- platform: generic
+  name: BDC_pd
+  still_image_url: "http://192.168.0.30:8123/local/\
+    person_detected/deepstack_object_bdc_latest.jpg"
+- platform: generic
+  name: frontdoor_pd
+  still_image_url: "http://192.168.0.30:8123/local/\
+    person_detected/deepstack_object_frontdoor_latest.jpg"
+- platform: generic
+  name: frontfloodlight_pd
+  still_image_url: "http://192.168.0.30:8123/local/\
+    person_detected/deepstack_object_frontfloodlight_latest.jpg"

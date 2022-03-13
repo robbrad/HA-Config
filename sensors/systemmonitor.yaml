@@ -1,0 +1,29 @@
+---
+# https://home-assistant.io/components/sensor/
+
+####################################################
+#                                                  #
+#                 SYSTEM MONITOR                   #
+#                                                  #
+####################################################
+
+# https://home-assistant.io/components/sensor.systemmonitor/
+- platform: systemmonitor
+  resources:
+    - type: disk_use_percent
+      arg: /home
+    - type: memory_use_percent
+    - type: processor_use
+    - type: network_in
+      arg: ens36
+    - type: network_out
+      arg: ens36
+    - type: load_1m
+    - type: load_5m
+    - type: load_15m
+
+####################################################
+#                                                  #
+#            END OF CONFIGURATION FILE             #
+#                                                  #
+####################################################

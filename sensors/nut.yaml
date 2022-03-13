@@ -1,0 +1,24 @@
+---
+# https://home-assistant.io/components/sensor.nut/
+- platform: nut
+  resources:
+    - ups.load
+    - input.voltage
+    - battery.runtime
+    - battery.voltage
+    - battery.charge
+  host: 192.168.0.20
+  name: UPS
+# https://home-assistant.io/components/sensor.template/
+- platform: template
+  sensors:
+    approxwattage:
+      unit_of_measurement: 'W'
+      value_template: '{{ states("sensor.ups_load") | float /100*900 }}'
+    upsstate:
+      value_template: >
+        "{%if states.sensor.ups_load.attributes.state == 'Online' %}
+        Online{% elif states.sensor.ups_load.attributes.state ==
+        'Online Battery Charging' %}
+        Online Battery Charging{% elif states.sensor.ups_load.attributes.state==
+        'unknown' %}Power Outage{% endif %}"

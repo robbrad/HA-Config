@@ -1,0 +1,7 @@
+---
+- platform: rest
+  resource: http://192.168.0.76:9006/as/system/information
+  name: sky_q_living_room_power_status
+  device_class: power
+  value_template: >
+    '{% if (value_json.activeStandby == False) %}on{% else %}off{% endif %}'

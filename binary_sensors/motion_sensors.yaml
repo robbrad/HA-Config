@@ -1,0 +1,28 @@
+---
+- platform: dlink_hnap
+  name: Kitchen Motion sensor
+  host: !secret motion_kitchen_host
+  type: motion
+  username: Admin
+  password: !secret motion_kitchen_password
+
+- platform: dlink_hnap
+  name: Garage Motion sensor
+  host: !secret motion_garage_host
+  type: motion
+  username: Admin
+  password: !secret motion_garage_password
+
+- platform: dlink_hnap
+  name: Landing Motion sensor
+  host: !secret motion_landing_host
+  type: motion
+  username: Admin
+  password: !secret motion_landing_password
+
+- platform: dlink_hnap
+  name: Hallway Motion sensor
+  host: !secret motion_hallway_host
+  type: motion
+  username: Admin
+  password: !secret motion_hallway_password
