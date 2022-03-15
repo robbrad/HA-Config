@@ -168,7 +168,7 @@
     my_dew_point:
       friendly_name: "Current Dew Point"
       value_template: >
-        "{{ ((states.sensor.mycurrenttemperaturef.state |
+        {{ ((states.sensor.mycurrenttemperaturef.state |
         float - ((100 - states.sensor.mycurrenthumidity.state |
-        float) /5)))|round(2)}}"
+        float) /5)))|round(2)}}
       unit_of_measurement: '°C'
