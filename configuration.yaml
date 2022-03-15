@@ -158,19 +158,6 @@ nest:
 
 ####################################################
 #                                                  #
-#                     MQTT                         #
-#                                                  #
-####################################################
-
-# https://home-assistant.io/docs/mqtt/broker/#run-your-own
-#mqtt:
-#  broker: 192.168.0.30
-#  port: 1883
-#  username: !secret mqtt_user
-#  password: !secret mqtt_pass
-#  discovery: true
-####################################################
-#                                                  #
 #                     Media Players                #
 #                                                  #
 ####################################################
