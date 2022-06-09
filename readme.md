@@ -29,7 +29,8 @@ I run a dedicated Ubuntu 18.04.3 LTS server Intel(R) Core(TM) i7-2600 CPU @ 3.40
 My setup is a Python Virtual Environment utilising this [guide](https://www.home-assistant.io/docs/installation/virtualenv/).
 
 # Automations
-* 
+
+*
 
 # Hardware Running in my Home Assistant Setup:
 
