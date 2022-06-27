@@ -245,9 +245,7 @@ panel_iframe:
 #                     Blinds                       #
 #                                                  #
 ####################################################
-somfy:
-  client_id: !secret somfy_client_id
-  client_secret: !secret somfy_client_secret
+
 
 ####################################################
 #                                                  #
