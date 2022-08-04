@@ -274,7 +274,6 @@ eufy_vacuum:
 climate:
   - platform: floureon
     name: UnderfloorHeating
-    mac: "78:0f:77:d4:40:eb"
     host: 192.168.1.82
 
 homekit:
