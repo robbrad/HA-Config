@@ -34,4 +34,3 @@
   state_topic: "ai/Backdoor/motion"
   payload_on: "Person"
   off_delay: 60
-  
