@@ -115,20 +115,21 @@ ssdp:
 ####################################################
 
 # https://home-assistant.io/docs/configuration/splitting_configuration/
-group: !include groups.yaml
-device_tracker: !include device_tracker.yaml
-notify: !include_dir_merge_list notification/
-switch: !include_dir_merge_list switches/
-sensor: !include_dir_merge_list sensors/
-automation: !include automations.yaml
-script: !include scripts.yaml
-shell_command: !include shell_commands.yaml
-binary_sensor: !include_dir_merge_list binary_sensors/
-input_select: !include input_select.yaml
-frontend: !include frontend.yaml
 alert: !include_dir_merge_list alerts/
-input_boolean: !include input_boolean.yaml
+automation: !include automations.yaml
+binary_sensor: !include_dir_merge_list binary_sensors/
 camera: !include camera.yaml
+device_tracker: !include device_tracker.yaml
+frontend: !include frontend.yaml
+group: !include groups.yaml
+input_boolean: !include input_boolean.yaml
+input_select: !include input_select.yaml
+mqtt: !include_dir_merge_list mqtt/
+notify: !include_dir_merge_list notification/
+script: !include scripts.yaml
+sensor: !include_dir_merge_list sensors/
+shell_command: !include shell_commands.yaml
+switch: !include_dir_merge_list switches/
 
 python_script: !include_dir_merge_named python_scripts/
 ####################################################
@@ -205,22 +206,6 @@ light:
     devices:
       192.168.0.86:
         name: led_strip_lounge
-mqtt:
-  cover:
-    - name: "Garage Door"
-      command_topic: "garage/door/1/action"
-      state_topic: "garage/door/1/status"
-      availability_topic: "GarHAge/availability"
-      qos: 0
-      optimistic: false
-      retain: false
-      payload_open: "OPEN"
-      payload_close: "CLOSE"
-      payload_stop: "STATE"
-      state_open: "open"
-      state_closed: "closed"
-      payload_available: "online"
-      payload_not_available: "offline"
 
 #  - platform: group
 #    name: Kitchen Blinds
