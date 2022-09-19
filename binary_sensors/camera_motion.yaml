@@ -24,3 +24,13 @@
   state_topic: "emqtt/CameraMotionRightSideReturn"
   payload_on: "ON"
   payload_off: "OFF"
+- platform: mqtt
+  name: garage_person
+  state_topic: "ai/Garage/motion"
+  payload_on: "Person"
+  off_delay: 60
+- platform: mqtt
+  name: backdoor_person
+  state_topic: "ai/Backdoor/motion"
+  payload_on: "Person"
+  off_delay: 60

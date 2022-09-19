@@ -30,12 +30,9 @@ system_health:
 influxdb:
   host: 192.168.0.30
   port: 8086
-  api_version: 2
-  bucket: home-assistant
-  organization: !secret influxdb_org
-  token: !secret influxdb_token
-  ssl: false
-  verify_ssl: false
+  database: home_assistant
+  max_retries: 3
+  default_measurement: state
 
 utility_meter:
   hourly_energy:
@@ -208,30 +205,29 @@ light:
     devices:
       192.168.0.86:
         name: led_strip_lounge
+mqtt:
+  cover:
+    - name: "Garage Door"
+      command_topic: "garage/door/1/action"
+      state_topic: "garage/door/1/status"
+      availability_topic: "GarHAge/availability"
+      qos: 0
+      optimistic: false
+      retain: false
+      payload_open: "OPEN"
+      payload_close: "CLOSE"
+      payload_stop: "STATE"
+      state_open: "open"
+      state_closed: "closed"
+      payload_available: "online"
+      payload_not_available: "offline"
 
-cover:
-  - platform: mqtt
-    name: "Garage Door"
-    state_topic: "garage/door/1/status"
-    command_topic: "garage/door/1/action"
-    availability_topic: "GarHAge/availability"
-    qos: 0
-    optimistic: false
-    retain: false
-    payload_open: "OPEN"
-    payload_close: "CLOSE"
-    payload_stop: "STATE"
-    state_open: "open"
-    state_closed: "closed"
-    payload_available: "online"
-    payload_not_available: "offline"
-
-  - platform: group
-    name: Kitchen Blinds
-    entities:
-      - cover.left_bifold
-      - cover.mid_bifold
-      - cover.right_bifold
+#  - platform: group
+#    name: Kitchen Blinds
+#    entities:
+#      - cover.left_bifold
+#      - cover.mid_bifold
+#      - cover.right_bifold
 
 panel_iframe:
   kodi_remote:
