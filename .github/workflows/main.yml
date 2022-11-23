@@ -83,7 +83,7 @@ jobs:
         run: |
           ls ./custom_components/classificationbox
       - name: Run Home Assistant Configuration Check
-        uses: frenck/action-home-assistant@v1.3
+        uses: frenck/action-home-assistant@v1.4
         with:
           path: "."
           secrets: ./test_secrets.yaml
